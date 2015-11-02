@@ -1,14 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2015 itemis AG and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     Alexander Nyßen (itemis AG) - initial API and implementation
- *
- *******************************************************************************/
 package gef4.mvc.tutorial;
 
 import java.util.Collections;
@@ -52,7 +41,7 @@ public class Gef4MvcTutorial extends Application {
 		primaryStage.setResizable(true);
 		primaryStage.setWidth(640);
 		primaryStage.setHeight(480);
-		primaryStage.setTitle("GEF4 MVC Tutorial 2");
+		primaryStage.setTitle("GEF4 MVC Tutorial 3");
 		primaryStage.sizeToScene();
 		primaryStage.show();
 
