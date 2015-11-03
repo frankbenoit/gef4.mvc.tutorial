@@ -5,10 +5,9 @@ import org.eclipse.gef4.geometry.planar.RoundedRectangle;
 import org.eclipse.gef4.mvc.fx.parts.AbstractFXContentPart;
 
 import gef4.mvc.tutorial.model.Model;
-import javafx.scene.Group;
 import javafx.scene.paint.Color;
 
-public class ModelPart extends AbstractFXContentPart<Group> {
+public class ModelPart extends AbstractFXContentPart<FXGeometryNode<RoundedRectangle>> {
 
 	@Override
 	public Model getContent() {
@@ -16,19 +15,19 @@ public class ModelPart extends AbstractFXContentPart<Group> {
 	}
 
 	@Override
-	protected Group createVisual() {
-		return new Group();
+	protected FXGeometryNode<RoundedRectangle> createVisual() {
+		Model model = getContent();
+		RoundedRectangle roundRect = new RoundedRectangle(model.getRect(), 10, 10 );
+		return new FXGeometryNode<>(roundRect);
 	}
 
 	@Override
-	protected void doRefreshVisual(Group visual) {
+	protected void doRefreshVisual(FXGeometryNode<RoundedRectangle> visual) {
 		Model model = getContent();
-		RoundedRectangle roundRect = new RoundedRectangle( model.getRect(), 10, 10 );
-		FXGeometryNode<RoundedRectangle> fxGeometryNode = new FXGeometryNode<>(roundRect);
-		visual.getChildren().add( fxGeometryNode );
-		fxGeometryNode.setFill( model.getColor() );
-		fxGeometryNode.setStroke( Color.BLACK );
-		fxGeometryNode.setStrokeWidth(2);
+		visual.getGeometry().setBounds(model.getRect());
+		visual.setFill( model.getColor() );
+		visual.setStroke( Color.BLACK );
+		visual.setStrokeWidth(2);
 	}
 
 	
