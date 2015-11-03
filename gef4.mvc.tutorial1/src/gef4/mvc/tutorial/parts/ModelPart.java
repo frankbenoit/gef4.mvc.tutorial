@@ -16,15 +16,13 @@ public class ModelPart extends AbstractFXContentPart<FXGeometryNode<RoundedRecta
 
 	@Override
 	protected FXGeometryNode<RoundedRectangle> createVisual() {
-		Model model = getContent();
-		RoundedRectangle roundRect = new RoundedRectangle(model.getRect(), 10, 10 );
-		return new FXGeometryNode<>(roundRect);
+		return new FXGeometryNode<>();
 	}
 
 	@Override
 	protected void doRefreshVisual(FXGeometryNode<RoundedRectangle> visual) {
 		Model model = getContent();
-		visual.getGeometry().setBounds(model.getRect());
+		visual.setGeometry(new RoundedRectangle(model.getRect(), 10, 10 ));
 		visual.setFill( model.getColor() );
 		visual.setStroke( Color.BLACK );
 		visual.setStrokeWidth(2);

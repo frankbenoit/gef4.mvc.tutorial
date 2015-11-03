@@ -26,6 +26,4 @@ public class Model {
 	public Color getColor() {
 		return color;
 	}
-	
-	
 }
