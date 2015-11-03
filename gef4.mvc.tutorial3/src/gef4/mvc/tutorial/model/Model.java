@@ -13,4 +13,10 @@ public class Model {
 	public LinkedList<TextNode> getNodes() {
 		return nodes;
 	}
+
+	public void doChanges() {
+		for (TextNode tn : nodes) {
+			tn.doChange();
+		}
+	}
 }

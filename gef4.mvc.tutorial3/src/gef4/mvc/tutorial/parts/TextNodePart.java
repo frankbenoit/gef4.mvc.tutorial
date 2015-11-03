@@ -1,5 +1,8 @@
 package gef4.mvc.tutorial.parts;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 import org.eclipse.gef4.fx.nodes.FXGeometryNode;
 import org.eclipse.gef4.geometry.planar.Dimension;
 import org.eclipse.gef4.geometry.planar.Rectangle;
@@ -16,8 +19,25 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class TextNodePart extends AbstractFXContentPart<Group> {
+public class TextNodePart extends AbstractFXContentPart<Group> implements PropertyChangeListener {
 
+	private Group group;
+	private Text text;
+	private FXGeometryNode<RoundedRectangle> fxRoundedRectNode;
+
+	@Override
+	protected void doActivate() {
+		super.doActivate();
+		getContent().addPropertyChangeListener(this);
+	}
+
+	@Override
+	protected void doDeactivate() {
+		getContent().removePropertyChangeListener(this);
+		super.doDeactivate();
+	}
+
+	
 	@Override
 	public TextNode getContent() {
 		return (TextNode)super.getContent();
@@ -25,21 +45,31 @@ public class TextNodePart extends AbstractFXContentPart<Group> {
 
 	@Override
 	protected Group createVisual() {
-		return new Group();
+		group = new Group();
+		text = new Text();
+		fxRoundedRectNode = new FXGeometryNode<>();
+		
+		group.getChildren().add(fxRoundedRectNode);
+		group.getChildren().add(text);
+		return group;
 	}
 
 	@Override
 	protected void doRefreshVisual(Group visual) {
 		TextNode model = getContent();
 		
-		Text text = new Text( model.getText() );
-		text.setFont( Font.font("Monospace", FontWeight.BOLD, 50 ) );
-		text.setFill(Color.BLACK);
-		text.setStrokeWidth(2);
+		Font font = Font.font("Monospace", FontWeight.BOLD, 50 );
+		Color textColor = Color.BLACK;
+		int textStrokeWidth = 2;
 		
+		
+		text.setText( model.getText() );
+		text.setFont( font );
+		text.setFill(textColor);
+		text.setStrokeWidth(textStrokeWidth);
+
 		// measure size
-		new Scene(new Group(text));
-		Bounds textBounds = text.getLayoutBounds();
+		Bounds textBounds = msrText(model.getText(), font, textStrokeWidth );
 
 		Rectangle bounds = new Rectangle( 
 				model.getPosition(), 
@@ -48,19 +78,35 @@ public class TextNodePart extends AbstractFXContentPart<Group> {
 		// the rounded rectangle
 		{
 			RoundedRectangle roundRect = new RoundedRectangle( bounds, 10, 10 );
-			FXGeometryNode<RoundedRectangle> fxGeometryNode = new FXGeometryNode<>(roundRect);
-			fxGeometryNode.setFill( model.getColor() );
-			fxGeometryNode.setStroke( Color.BLACK );
-			fxGeometryNode.setStrokeWidth(2);
-			
-			visual.getChildren().add( fxGeometryNode );
+			fxRoundedRectNode.setGeometry(roundRect);
+			fxRoundedRectNode.setFill( model.getColor() );
+			fxRoundedRectNode.setStroke( Color.BLACK );
+			fxRoundedRectNode.setStrokeWidth(2);
+			fxRoundedRectNode.toBack();
 		}
 		// the text
 		{
 			text.setTextOrigin( VPos.CENTER );
 			text.setY( bounds.getY() + bounds.getHeight()/2);
 			text.setX( bounds.getX() + bounds.getWidth()/2 - textBounds.getWidth()/2 );
-			visual.getChildren().add( text );
+			text.toFront();
+		}
+	}
+
+	private Bounds msrText(String string, Font font, int textStrokeWidth) {
+		Text msrText = new Text(string);
+		msrText.setFont( font );
+		msrText.setStrokeWidth(textStrokeWidth);
+
+		new Scene(new Group(msrText));
+		Bounds textBounds = msrText.getLayoutBounds();
+		return textBounds;
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		if( evt.getSource() == getContent() ){
+			refreshVisual();
 		}
 	}
 
