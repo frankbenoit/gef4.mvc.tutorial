@@ -3,8 +3,6 @@ package gef4.mvc.tutorial.model;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -24,13 +22,13 @@ public class TextNode implements IPropertyChangeNotifier {
 	@XmlTransient
 	public final String TEXT_PROPERTY = "text";
 	
-	@XmlTransient
-	public Point position;
+	@XmlTransient // handled over setter/getter
+	private Point position;
 	
-	@XmlTransient
+	@XmlTransient // handled over setter/getter
 	private String text;
 	
-	@XmlTransient
+	@XmlTransient // not handled now
 	private Color color = Color.LIGHTSKYBLUE;
 
 	public TextNode(){
@@ -76,6 +74,7 @@ public class TextNode implements IPropertyChangeNotifier {
 		 this.text = text;
 		 pcs.firePropertyChange(TEXT_PROPERTY, textOld, text);
 	 }
+	 
 	 public void setPosition(Point position) {
 		 Point positionOld = this.position;
 		 this.position = position;

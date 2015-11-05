@@ -11,7 +11,6 @@ import org.eclipse.gef4.geometry.planar.RoundedRectangle;
 import org.eclipse.gef4.mvc.fx.parts.AbstractFXContentPart;
 
 import gef4.mvc.tutorial.model.TextNode;
-import javafx.collections.ListChangeListener.Change;
 import javafx.geometry.Bounds;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
