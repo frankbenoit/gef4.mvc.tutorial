@@ -27,7 +27,9 @@ public class ChangeTextNodePositionOperation extends AbstractOperation implement
 	@Override
 	public IStatus execute(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		Affine transform = part.getAdapter(FXTransformPolicy.TRANSFORM_PROVIDER_KEY).get();
-		part.translate(transform.getTx(), transform.getTy());
+		// tell the part, which updates the model, will also trigger a doRefreshVisuals
+		part.translate(transform.getTx(), transform.getTy()); 
+		// reset the transformation
 		transform.setTx(0);
 		transform.setTy(0);
 		return Status.OK_STATUS;

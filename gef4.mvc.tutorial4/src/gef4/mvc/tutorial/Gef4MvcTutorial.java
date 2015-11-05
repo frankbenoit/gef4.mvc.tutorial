@@ -177,7 +177,7 @@ public class Gef4MvcTutorial extends Application {
 						FXDefaultFeedbackPartFactory.HOVER_FEEDBACK_GEOMETRY_PROVIDER))
 					.to(VisualBoundsGeometryProvider.class);
 			}
-
+			
 			protected void bindTextNodePartAdapters( MapBinder<AdapterKey<?>, Object> adapterMapBinder) {
 				// register resize/transform policies (writing changes also to model)
 				adapterMapBinder

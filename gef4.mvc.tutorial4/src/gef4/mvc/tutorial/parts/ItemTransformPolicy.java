@@ -7,6 +7,7 @@ import org.eclipse.gef4.mvc.operations.ITransactionalOperation;
 import gef4.mvc.tutorial.ChangeTextNodePositionOperation;
 
 public class ItemTransformPolicy extends FXTransformPolicy {
+
 	@Override
 	public ITransactionalOperation commit() {
 	    ITransactionalOperation visualOperation = super.commit();
@@ -14,7 +15,6 @@ public class ItemTransformPolicy extends FXTransformPolicy {
 	    ForwardUndoCompositeOperation commit = new ForwardUndoCompositeOperation("Translate()");
 	    if (visualOperation != null) commit.add(visualOperation);
 	    if (modelOperation != null) commit.add(modelOperation);
-	    
 	    return commit.unwrap(true);
 	}
 
