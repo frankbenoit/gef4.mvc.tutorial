@@ -39,9 +39,9 @@ import com.google.inject.multibindings.MapBinder;
 
 import gef4.mvc.tutorial.model.Model;
 import gef4.mvc.tutorial.model.TextNode;
-import gef4.mvc.tutorial.parts.ItemTransformPolicy;
 import gef4.mvc.tutorial.parts.ModelPartFactory;
 import gef4.mvc.tutorial.parts.TextNodePart;
+import gef4.mvc.tutorial.policies.ItemTransformPolicy;
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;

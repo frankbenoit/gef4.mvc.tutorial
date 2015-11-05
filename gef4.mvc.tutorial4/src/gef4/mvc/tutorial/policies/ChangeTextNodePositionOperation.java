@@ -1,4 +1,4 @@
-package gef4.mvc.tutorial;
+package gef4.mvc.tutorial.policies;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.operations.AbstractOperation;

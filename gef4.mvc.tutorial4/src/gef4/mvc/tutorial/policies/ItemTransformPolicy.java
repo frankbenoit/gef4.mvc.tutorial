@@ -1,10 +1,8 @@
-package gef4.mvc.tutorial.parts;
+package gef4.mvc.tutorial.policies;
 
 import org.eclipse.gef4.mvc.fx.policies.FXTransformPolicy;
 import org.eclipse.gef4.mvc.operations.ForwardUndoCompositeOperation;
 import org.eclipse.gef4.mvc.operations.ITransactionalOperation;
-
-import gef4.mvc.tutorial.ChangeTextNodePositionOperation;
 
 public class ItemTransformPolicy extends FXTransformPolicy {
 
