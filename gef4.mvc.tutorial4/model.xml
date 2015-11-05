@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <nodes>
+        <position>
+            <x>176.0</x>
+            <y>201.0</y>
+        </position>
+        <text>First</text>
+    </nodes>
+    <nodes>
+        <position>
+            <x>20.0</x>
+            <y>120.0</y>
+        </position>
+        <text>Second</text>
+    </nodes>
+</model>

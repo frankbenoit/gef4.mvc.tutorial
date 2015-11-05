@@ -16,6 +16,19 @@ Tutorial 3
 Show 2 text nodes. Have a 2 level model tree.
 
 
+Tutorial 4
+==========
+
+Have the nodes be dragable. Store position in the model, save/reload to file.
+
+
+Future
+==========
+
+ - Editable Text
+ 
+
+
 
 
 
