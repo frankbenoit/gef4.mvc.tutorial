@@ -21,7 +21,6 @@ import javafx.scene.text.Text;
 
 public class TextNodePart extends AbstractFXContentPart<Group> implements PropertyChangeListener {
 
-	private Group group;
 	private Text text;
 	private FXGeometryNode<RoundedRectangle> fxRoundedRectNode;
 
@@ -45,7 +44,7 @@ public class TextNodePart extends AbstractFXContentPart<Group> implements Proper
 
 	@Override
 	protected Group createVisual() {
-		group = new Group();
+		Group group = new Group();
 		text = new Text();
 		fxRoundedRectNode = new FXGeometryNode<>();
 		

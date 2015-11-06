@@ -13,7 +13,6 @@ import javafx.scene.Node;
 
 public class ModelPart extends AbstractFXContentPart<Group> {
 
-	private Group contentLayer;
 	@Override
 	public Model getContent() {
 		return (Model)super.getContent();
@@ -21,7 +20,7 @@ public class ModelPart extends AbstractFXContentPart<Group> {
 
 	@Override
 	protected Group createVisual() {
-		return (contentLayer = new Group());
+		return new Group();
 	}
 
 	@Override
@@ -34,16 +33,9 @@ public class ModelPart extends AbstractFXContentPart<Group> {
 		return model.getNodes();
 	}
 	
-	protected Group getContentLayer() {
-		if (contentLayer == null) {
-			createVisual();
-		}
-		return contentLayer;
-	}
-
 	@Override
 	protected void addChildVisual(IVisualPart<Node, ? extends Node> child, int index) {
-		ObservableList<Node> children = getContentLayer().getChildren();
+		ObservableList<Node> children = getVisual().getChildren();
 		Node visual = child.getVisual();
 		children.add(visual);
 	}

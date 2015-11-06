@@ -9,6 +9,7 @@ import org.eclipse.gef4.geometry.planar.Point;
 import org.eclipse.gef4.geometry.planar.Rectangle;
 import org.eclipse.gef4.geometry.planar.RoundedRectangle;
 import org.eclipse.gef4.mvc.fx.parts.AbstractFXContentPart;
+import org.eclipse.gef4.mvc.fx.policies.FXTransformPolicy;
 
 import gef4.mvc.tutorial.model.TextNode;
 import javafx.geometry.Bounds;
@@ -19,10 +20,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Affine;
 
 public class TextNodePart extends AbstractFXContentPart<Group> implements PropertyChangeListener {
 
-	private Group group;
 	private Text text;
 	private FXGeometryNode<RoundedRectangle> fxRoundedRectNode;
 
@@ -46,13 +47,13 @@ public class TextNodePart extends AbstractFXContentPart<Group> implements Proper
 
 	@Override
 	protected Group createVisual() {
-		group = new Group();
+		Group group = new Group();
 		text = new Text();
 		fxRoundedRectNode = new FXGeometryNode<>();
 		
 		group.getChildren().add(fxRoundedRectNode);
 		group.getChildren().add(text);
-		
+
 		return group;
 	}
 
