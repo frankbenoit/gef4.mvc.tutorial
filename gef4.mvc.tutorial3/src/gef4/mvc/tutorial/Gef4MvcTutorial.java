@@ -3,7 +3,7 @@ package gef4.mvc.tutorial;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.gef4.fx.nodes.ScrollPaneEx;
+import org.eclipse.gef4.fx.nodes.InfiniteCanvas;
 import org.eclipse.gef4.mvc.fx.MvcFxModule;
 import org.eclipse.gef4.mvc.fx.domain.FXDomain;
 import org.eclipse.gef4.mvc.fx.viewer.FXViewer;
@@ -45,7 +45,8 @@ public class Gef4MvcTutorial extends Application {
 		AnchorPane paneCtrl = new AnchorPane();
 		AnchorPane paneDraw = new AnchorPane();
 		VBox vbox = new VBox( paneCtrl, paneDraw );
-
+		vbox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		
 		Button btnUpdateModel = new Button("update model");
 		btnUpdateModel.setOnAction( e -> model.doChanges() );
 		btnUpdateModel.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -54,9 +55,9 @@ public class Gef4MvcTutorial extends Application {
 		AnchorPane.setLeftAnchor(btnUpdateModel, 10d);
 		AnchorPane.setRightAnchor(btnUpdateModel, 10d);
 
-		ScrollPaneEx drawingPane = viewer.getScrollPane();
+		InfiniteCanvas drawingPane = viewer.getCanvas();
 		paneDraw.getChildren().add(drawingPane);
-		paneDraw.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		paneDraw.setPrefHeight(2000);
 		AnchorPane.setTopAnchor(drawingPane, 10d);
 		AnchorPane.setLeftAnchor(drawingPane, 10d);
 		AnchorPane.setRightAnchor(drawingPane, 10d);

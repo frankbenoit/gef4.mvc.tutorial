@@ -12,7 +12,7 @@ import javax.xml.bind.Unmarshaller;
 
 import org.eclipse.gef4.common.adapt.AdapterKey;
 import org.eclipse.gef4.common.inject.AdapterMaps;
-import org.eclipse.gef4.fx.nodes.ScrollPaneEx;
+import org.eclipse.gef4.fx.nodes.InfiniteCanvas;
 import org.eclipse.gef4.geometry.planar.IGeometry;
 import org.eclipse.gef4.mvc.fx.MvcFxModule;
 import org.eclipse.gef4.mvc.fx.domain.FXDomain;
@@ -83,7 +83,7 @@ public class Gef4MvcTutorial extends Application {
 		AnchorPane.setLeftAnchor(btnUpdateModel, 10d);
 		AnchorPane.setRightAnchor(btnUpdateModel, 10d);
 
-		ScrollPaneEx drawingPane = viewer.getScrollPane();
+		InfiniteCanvas drawingPane = viewer.getCanvas();
 		paneDraw.getChildren().add(drawingPane);
 		paneDraw.setPrefHeight(2000);
 		AnchorPane.setTopAnchor(drawingPane, 10d);
@@ -98,14 +98,6 @@ public class Gef4MvcTutorial extends Application {
 		primaryStage.setHeight(480);
 		primaryStage.setTitle("GEF4 MVC Tutorial 4");
 
-		Rectangle clipRectangle = new Rectangle();
-		paneDraw.setClip(clipRectangle);
-		paneDraw.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
-			System.out.printf("Gef4MvcTutorial.start() %10s %10s\n", newValue.getWidth(), newValue.getHeight() );
-		  clipRectangle.setWidth(newValue.getWidth());
-		  clipRectangle.setHeight(newValue.getHeight());
-		});
-		
 		primaryStage.show();
 
 		domain.activate();
