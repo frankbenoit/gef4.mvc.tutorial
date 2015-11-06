@@ -1,5 +1,7 @@
 # gef4.mvc.tutorial
 
+Depends on GEF4 : SHA-1: 2ea2a40e140490926a638e145b97aa644ef69930
+
 Tutorial 1
 ==========
 
