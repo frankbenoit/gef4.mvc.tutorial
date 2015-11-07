@@ -1,7 +1,8 @@
-package gef4.mvc.tutorial.parts;
+package gef4.mvc.tutorial.policies;
 
 import org.eclipse.gef4.mvc.fx.policies.AbstractFXOnTypePolicy;
 
+import gef4.mvc.tutorial.parts.TextNodePart;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 

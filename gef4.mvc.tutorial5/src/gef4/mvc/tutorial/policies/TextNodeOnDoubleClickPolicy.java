@@ -1,7 +1,8 @@
-package gef4.mvc.tutorial.parts;
+package gef4.mvc.tutorial.policies;
 
 import org.eclipse.gef4.mvc.fx.policies.AbstractFXOnClickPolicy;
 
+import gef4.mvc.tutorial.parts.TextNodePart;
 import javafx.scene.input.MouseEvent;
 
 // only applicable for NodeContentPart (see #getHost())
