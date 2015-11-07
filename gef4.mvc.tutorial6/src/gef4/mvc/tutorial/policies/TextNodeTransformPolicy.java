@@ -4,7 +4,7 @@ import org.eclipse.gef4.mvc.fx.policies.FXTransformPolicy;
 import org.eclipse.gef4.mvc.operations.ForwardUndoCompositeOperation;
 import org.eclipse.gef4.mvc.operations.ITransactionalOperation;
 
-public class ItemTransformPolicy extends FXTransformPolicy {
+public class TextNodeTransformPolicy extends FXTransformPolicy {
 
 	@Override
 	public ITransactionalOperation commit() {

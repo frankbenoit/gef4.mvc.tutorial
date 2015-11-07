@@ -61,7 +61,7 @@ public class Gef4MvcTutorial extends Application {
 		AnchorPane.setRightAnchor(btnUpdateModel, 10d);
 
 		InfiniteCanvas drawingPane = viewer.getCanvas();
-		drawingPane.clipContentProperty().set(true);
+//		drawingPane.clipContentProperty().set(true);
 		paneDraw.getChildren().add(drawingPane);
 		paneDraw.setPrefHeight(2000);
 		AnchorPane.setTopAnchor(drawingPane, 10d);
@@ -75,14 +75,6 @@ public class Gef4MvcTutorial extends Application {
 		primaryStage.setWidth(640);
 		primaryStage.setHeight(480);
 		primaryStage.setTitle("GEF4 MVC Tutorial 5 - Editable Text");
-
-//		Rectangle clipRectangle = new Rectangle();
-//		paneDraw.setClip(clipRectangle);
-//		paneDraw.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
-//			System.out.printf("Gef4MvcTutorial.start() %10s %10s\n", newValue.getWidth(), newValue.getHeight() );
-//		  clipRectangle.setWidth(newValue.getWidth());
-//		  clipRectangle.setHeight(newValue.getHeight());
-//		});
 		
 		primaryStage.show();
 
