@@ -8,6 +8,7 @@ import org.eclipse.gef4.fx.nodes.FXGeometryNode;
 import org.eclipse.gef4.geometry.planar.Point;
 import org.eclipse.gef4.geometry.planar.Rectangle;
 import org.eclipse.gef4.geometry.planar.RoundedRectangle;
+import org.eclipse.gef4.mvc.domain.IDomain;
 import org.eclipse.gef4.mvc.fx.parts.AbstractFXContentPart;
 import org.eclipse.gef4.mvc.fx.policies.FXTransformPolicy;
 import org.eclipse.gef4.mvc.models.FocusModel;
@@ -16,6 +17,7 @@ import gef4.mvc.tutorial.model.TextNode;
 import gef4.mvc.tutorial.policies.ChangeTextNodeTextOperation;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
@@ -172,9 +174,11 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 		if( commit ){
 			String newText = editText.getText();
 			text.setText(newText);
-			ChangeTextNodeTextOperation op = new ChangeTextNodeTextOperation(this, getContent().getText(), newText);
 			try {
-				getViewer().getDomain().getOperationHistory().execute(op, null, null);
+				IDomain<Node> domain = getViewer().getDomain();
+				ChangeTextNodeTextOperation op = new ChangeTextNodeTextOperation(this, getContent().getText(), newText);
+				op.addContext(domain.getUndoContext());
+				domain.getOperationHistory().execute(op, null, null);
 			} catch (ExecutionException e) {
 				e.printStackTrace();
 			}

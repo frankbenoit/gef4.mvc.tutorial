@@ -113,7 +113,7 @@ public class Gef4MvcTutorial extends Application {
 		primaryStage.setResizable(true);
 		primaryStage.setWidth(640);
 		primaryStage.setHeight(480);
-		primaryStage.setTitle("GEF4 MVC Tutorial 5 - Editable Text");
+		primaryStage.setTitle("GEF4 MVC Tutorial 6 - Undo / Redo");
 		
 		primaryStage.show();
 

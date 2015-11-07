@@ -43,7 +43,7 @@ public class ChangeTextNodeTextOperation extends AbstractOperation implements IT
 
 	@Override
 	public boolean isNoOp() {
-		return false;
+		return oldText.equals(newText);
 	}
 
 }

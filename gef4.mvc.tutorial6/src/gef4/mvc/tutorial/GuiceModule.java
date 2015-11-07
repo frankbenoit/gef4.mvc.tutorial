@@ -23,6 +23,7 @@ import com.google.inject.multibindings.MapBinder;
 import gef4.mvc.tutorial.parts.ModelPartFactory;
 import gef4.mvc.tutorial.parts.TextNodePart;
 import gef4.mvc.tutorial.policies.TextNodeTransformPolicy;
+import gef4.mvc.tutorial.policies.GlobalOnTypePolicy;
 import gef4.mvc.tutorial.policies.TextNodeOnDoubleClickPolicy;
 import gef4.mvc.tutorial.policies.TextNodeOnTypePolicy;
 import javafx.scene.Node;
@@ -82,6 +83,21 @@ public final class GuiceModule extends MvcFxModule {
 
 	}
 
+	@Override
+	protected void bindAbstractViewerAdapters(MapBinder<AdapterKey<?>, Object> adapterMapBinder) {
+		super.bindAbstractViewerAdapters(adapterMapBinder);
+		
+
+	}
+
+	@Override
+	protected void bindAbstractRootPartAdapters(MapBinder<AdapterKey<?>, Object> adapterMapBinder) {
+		super.bindAbstractRootPartAdapters(adapterMapBinder);
+		adapterMapBinder
+		.addBinding( AdapterKey.get( FXTypeTool.TOOL_POLICY_KEY, "GlobalOnTypePolicy"))
+		.to( GlobalOnTypePolicy.class);
+	}
+	
 	@Override
 	protected void configure() {
 		super.configure();
