@@ -33,11 +33,21 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 	protected void doActivate() {
 		super.doActivate();
 		getContent().addPropertyChangeListener(this);
+
+		getViewer()
+			.getAdapter(FocusModel.class)
+			.addPropertyChangeListener( this::handleFocusModelUpdate );
+	
 	}
 
 	@Override
 	protected void doDeactivate() {
 		getContent().removePropertyChangeListener(this);
+
+		getViewer()
+			.getAdapter(FocusModel.class)
+			.removePropertyChangeListener( this::handleFocusModelUpdate );
+		
 		super.doDeactivate();
 	}
 
@@ -88,35 +98,20 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 
 		visual.setTranslateX(model.getPosition().x);
 		visual.setTranslateY(model.getPosition().y);
-		// the rounded rectangle
-		{
-			RoundedRectangle roundRect = new RoundedRectangle( bounds, 10, 10 );
-			fxRoundedRectNode.setGeometry(roundRect);
-			fxRoundedRectNode.setFill( model.getColor() );
-			fxRoundedRectNode.setStroke( Color.BLACK );
-			fxRoundedRectNode.setStrokeWidth(2);
-			fxRoundedRectNode.toBack();
-		}
-		// the text
-//		if( !isEditing ){
-//			text.setTextOrigin( VPos.CENTER );
-//			text.setY( bounds.getY() + bounds.getHeight()/2);
-//			text.setX( bounds.getX() + bounds.getWidth()/2 - textBounds.getWidth()/2 );
-			text.toFront();
-//		}
-//		else {
-//			editText.setTextOrigin( VPos.CENTER );
-//			editText.set().( bounds.getY() + bounds.getHeight()/2);
-//			editText.setX( bounds.getX() + bounds.getWidth()/2 - textBounds.getWidth()/2 );
-//			editText.toFront();
-			
-//		}
-			
-			
-		getViewer()
-			.getAdapter(FocusModel.class)
-			.addPropertyChangeListener( this::handleFocusModelUpdate );
 		
+		// the rounded rectangle
+		RoundedRectangle roundRect = new RoundedRectangle( bounds, 10, 10 );
+		fxRoundedRectNode.setGeometry(roundRect);
+		fxRoundedRectNode.setFill( model.getColor() );
+		fxRoundedRectNode.setStroke( Color.BLACK );
+		fxRoundedRectNode.setStrokeWidth(2);
+		fxRoundedRectNode.toBack();
+
+		text.toFront();
+		
+		editText.toFront();
+		editText.setPrefWidth(bounds.getWidth());
+			
 
 	}
 	
@@ -155,17 +150,13 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 			return;
 		}
 			
-		editText.setManaged(true);
-		editText.setVisible(true);
-		text.setManaged(false);
-		text.setVisible(false);
-		editText.setText(text.getText());
-		
-		editText.requestFocus();
-		editText.selectAll();
-		getVisual().layout();
 		
 		isEditing = true;
+		setVisualsForEditing();
+		
+		editText.setText(text.getText());
+		editText.requestFocus();
+		refreshVisual();
 	}
 	
 	public void editModeEnd( boolean commit ) {
@@ -177,12 +168,19 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 			text.setText(newText);
 			getContent().setText(newText);
 		}
-		editText.setManaged(false);
-		editText.setVisible(false);
-		text.setManaged(true);
-		text.setVisible(true);
-
 		isEditing = false;
+		setVisualsForEditing();
+	}
+
+	private void setVisualsForEditing(){
+		editText.setManaged(isEditing);
+		editText.setVisible(isEditing);
+		text.setManaged(!isEditing);
+		text.setVisible(!isEditing);
+		
+	}
+	public boolean isEditing() {
+		return isEditing;
 	}
 
 }

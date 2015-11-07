@@ -20,8 +20,8 @@ import com.google.inject.Provider;
 import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.MapBinder;
 
-import gef4.mvc.tutorial.parts.EditNodeLabelOnDoubleClickPolicy;
-import gef4.mvc.tutorial.parts.ExitEditingNodeLabelOnEnterPolicy;
+import gef4.mvc.tutorial.parts.TextNodeOnDoubleClickPolicy;
+import gef4.mvc.tutorial.parts.TextNodeOnTypePolicy;
 import gef4.mvc.tutorial.parts.ModelPartFactory;
 import gef4.mvc.tutorial.parts.TextNodePart;
 import gef4.mvc.tutorial.policies.ItemTransformPolicy;
@@ -73,12 +73,12 @@ public final class GuiceModule extends MvcFxModule {
 		
 		// edit node label policies
 		adapterMapBinder
-			.addBinding( AdapterKey.get(FXClickDragTool.CLICK_TOOL_POLICY_KEY, "EditNodeLabelOnDoubleClickPolicy"))
-			.to( EditNodeLabelOnDoubleClickPolicy.class);
+			.addBinding( AdapterKey.get( FXClickDragTool.CLICK_TOOL_POLICY_KEY, "TextNodeOnDoubleClickPolicy"))
+			.to( TextNodeOnDoubleClickPolicy.class);
 		
 		adapterMapBinder
-			.addBinding( AdapterKey.get(FXTypeTool.TOOL_POLICY_KEY, "ExitEditingNodeLabelOnEnterPolicy"))
-			.to( ExitEditingNodeLabelOnEnterPolicy.class);
+			.addBinding( AdapterKey.get( FXTypeTool.TOOL_POLICY_KEY, "TextNodeOnTypePolicy"))
+			.to( TextNodeOnTypePolicy.class);
 
 	}
 
