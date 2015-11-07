@@ -29,7 +29,7 @@ http://fbenoit.blogspot.de/2015/11/gef4-tutorial-part-4-dragging-and-store.html
 Tutorial 5
 ==========
 
-The text of the nodes is editable by double click or selected + <enter>  
+The text of the nodes is editable by double click or selected then press ENTER or F2  
 http://fbenoit.blogspot.de/2015/11/gef4-tutorial-part-5-editing-text.html
 
 Tutorial 6
