@@ -27,6 +27,7 @@ import gef4.mvc.tutorial.parts.TextNodePart;
 import gef4.mvc.tutorial.policies.ItemTransformPolicy;
 import javafx.scene.Node;
 
+@SuppressWarnings("serial")
 public final class GuiceModule extends MvcFxModule {
 	@Override
 	protected void bindAbstractContentPartAdapters( MapBinder<AdapterKey<?>, Object> adapterMapBinder) {

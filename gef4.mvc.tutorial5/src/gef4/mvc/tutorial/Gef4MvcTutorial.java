@@ -27,10 +27,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-@SuppressWarnings("serial")
 public class Gef4MvcTutorial extends Application {
 
 	private Model model;
