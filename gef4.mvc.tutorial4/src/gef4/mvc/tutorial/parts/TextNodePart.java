@@ -75,7 +75,7 @@ public class TextNodePart extends AbstractFXContentPart<Group> implements Proper
 		Bounds textBounds = msrText(model.getText(), font, textStrokeWidth );
 
 		Rectangle bounds = new Rectangle( 
-				model.getPosition(), 
+				new Point( 0, 0 ), 
 				new Dimension( textBounds.getWidth() + textBounds.getHeight(), textBounds.getHeight() * 1.5 ));
 
 		// the rounded rectangle
@@ -93,6 +93,12 @@ public class TextNodePart extends AbstractFXContentPart<Group> implements Proper
 			text.setY( bounds.getY() + bounds.getHeight()/2);
 			text.setX( bounds.getX() + bounds.getWidth()/2 - textBounds.getWidth()/2 );
 			text.toFront();
+		}
+		{
+			Point position = model.getPosition();
+			Affine affine = getAdapter(FXTransformPolicy.TRANSFORM_PROVIDER_KEY).get();
+			affine.setTx(position.x);
+			affine.setTy(position.y);
 		}
 	}
 
@@ -116,6 +122,10 @@ public class TextNodePart extends AbstractFXContentPart<Group> implements Proper
 	public void translate( double x, double y ){
 		Point pos = getContent().getPosition();
 		getContent().setPosition( new Point( pos.x + x, pos.y + y ) );
+	}
+
+	public void setPosition(Point newPos) {
+		getContent().setPosition( newPos );
 	}
 	
 }

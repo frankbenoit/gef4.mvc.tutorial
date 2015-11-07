@@ -41,7 +41,7 @@ import gef4.mvc.tutorial.model.Model;
 import gef4.mvc.tutorial.model.TextNode;
 import gef4.mvc.tutorial.parts.ModelPartFactory;
 import gef4.mvc.tutorial.parts.TextNodePart;
-import gef4.mvc.tutorial.policies.ItemTransformPolicy;
+import gef4.mvc.tutorial.policies.TextNodeTransformPolicy;
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -173,7 +173,7 @@ public class Gef4MvcTutorial extends Application {
 				// register resize/transform policies (writing changes also to model)
 				adapterMapBinder
 					.addBinding(AdapterKey.get(FXTransformPolicy.class))
-					.to(ItemTransformPolicy.class);
+					.to(TextNodeTransformPolicy.class);
 					//.to(FXTransformPolicy.class);
 				
 				// interaction policies to relocate on drag (including anchored elements, which are linked)
