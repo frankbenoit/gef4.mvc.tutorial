@@ -48,7 +48,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 @SuppressWarnings("serial")
@@ -96,7 +95,7 @@ public class Gef4MvcTutorial extends Application {
 		primaryStage.setResizable(true);
 		primaryStage.setWidth(640);
 		primaryStage.setHeight(480);
-		primaryStage.setTitle("GEF4 MVC Tutorial 4");
+		primaryStage.setTitle("GEF4 MVC Tutorial 4 - Drag and persist");
 
 		primaryStage.show();
 

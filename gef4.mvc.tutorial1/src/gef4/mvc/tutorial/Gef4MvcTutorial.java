@@ -41,7 +41,7 @@ public class Gef4MvcTutorial extends Application {
 		primaryStage.setResizable(true);
 		primaryStage.setWidth(640);
 		primaryStage.setHeight(480);
-		primaryStage.setTitle("GEF4 MVC Tutorial 1");
+		primaryStage.setTitle("GEF4 MVC Tutorial 1 - minimal MVC");
 		primaryStage.sizeToScene();
 		primaryStage.show();
 
