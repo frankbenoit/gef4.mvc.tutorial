@@ -9,6 +9,7 @@ import org.eclipse.gef4.geometry.planar.Point;
 import org.eclipse.gef4.geometry.planar.Rectangle;
 import org.eclipse.gef4.geometry.planar.RoundedRectangle;
 import org.eclipse.gef4.mvc.fx.parts.AbstractFXContentPart;
+import org.eclipse.gef4.mvc.fx.policies.FXTransformPolicy;
 import org.eclipse.gef4.mvc.models.FocusModel;
 
 import gef4.mvc.tutorial.model.TextNode;
@@ -22,6 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Affine;
 
 public class TextNodePart extends AbstractFXContentPart<StackPane> implements PropertyChangeListener {
 
@@ -95,12 +97,9 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 		Bounds textBounds = msrText(model.getText(), font, textStrokeWidth );
 
 		Rectangle bounds = new Rectangle( 
-				model.getPosition().x, model.getPosition().y, 
+				0, 0, 
 				textBounds.getWidth() + textBounds.getHeight(), textBounds.getHeight() * 1.5 );
 
-		visual.setTranslateX(model.getPosition().x);
-		visual.setTranslateY(model.getPosition().y);
-		
 		// the rounded rectangle
 		RoundedRectangle roundRect = new RoundedRectangle( bounds, 10, 10 );
 		fxRoundedRectNode.setGeometry(roundRect);
@@ -114,6 +113,12 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 		editText.toFront();
 		editText.setPrefWidth(bounds.getWidth());
 			
+		{
+			Point position = model.getPosition();
+			Affine affine = getAdapter(FXTransformPolicy.TRANSFORM_PROVIDER_KEY).get();
+			affine.setTx(position.x);
+			affine.setTy(position.y);
+		}
 
 	}
 	
@@ -142,9 +147,8 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 		}
 	}
 
-	public void translate( double x, double y ){
-		Point pos = getContent().getPosition();
-		getContent().setPosition( new Point( pos.x + x, pos.y + y ) );
+	public void setPosition(Point newPos) {
+		getContent().setPosition( newPos );
 	}
 	
 	public void editModeStart() {

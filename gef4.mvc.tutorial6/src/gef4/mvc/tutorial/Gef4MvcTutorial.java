@@ -11,12 +11,9 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import org.eclipse.core.commands.operations.DefaultOperationHistory;
 import org.eclipse.core.commands.operations.IOperationHistory;
 import org.eclipse.core.commands.operations.IUndoContext;
 import org.eclipse.core.commands.operations.IUndoableOperation;
-import org.eclipse.core.runtime.Assert;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.gef4.fx.nodes.InfiniteCanvas;
 import org.eclipse.gef4.mvc.fx.domain.FXDomain;
 import org.eclipse.gef4.mvc.fx.viewer.FXViewer;
@@ -128,7 +125,13 @@ public class Gef4MvcTutorial extends Application {
 	private void updateUnReDoButton( Button btn, String label, Function<IUndoContext, IUndoableOperation[]> getHist ){
 		IUndoableOperation[] entries = getHist.apply(domain.getUndoContext());
 		btn.setDisable( entries.length == 0 );
-		btn.setText( entries.length > 0 ? String.format("%s: %s", label, entries[entries.length-1].getLabel()) : label );
+		if( entries.length == 0 ){
+			btn.setText( label );
+		}
+		else {
+			IUndoableOperation currentEntry = entries[entries.length-1];
+			btn.setText( String.format("%s: %s", label, currentEntry.getLabel()));
+		}
 	}
 	
 	@Override
