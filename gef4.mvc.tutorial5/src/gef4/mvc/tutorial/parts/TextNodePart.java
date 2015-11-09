@@ -95,7 +95,7 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 		Bounds textBounds = msrText(model.getText(), font, textStrokeWidth );
 
 		Rectangle bounds = new Rectangle( 
-				0, 0 , 
+				0, 0, 
 				textBounds.getWidth() + textBounds.getHeight(), textBounds.getHeight() * 1.5 );
 
 		// the rounded rectangle

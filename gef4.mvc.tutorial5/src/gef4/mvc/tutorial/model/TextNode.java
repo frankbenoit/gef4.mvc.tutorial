@@ -78,7 +78,6 @@ public class TextNode implements IPropertyChangeNotifier {
 	 public void setPosition(Point position) {
 		 Point positionOld = this.position;
 		 this.position = position;
-		 System.out.printf("TextNode.setPosition(%s)\n", position);
 		 pcs.firePropertyChange(POSITION_PROPERTY, positionOld, position);
 	 }
 

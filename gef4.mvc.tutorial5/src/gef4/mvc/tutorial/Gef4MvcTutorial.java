@@ -61,7 +61,6 @@ public class Gef4MvcTutorial extends Application {
 		AnchorPane.setRightAnchor(btnUpdateModel, 10d);
 
 		InfiniteCanvas drawingPane = viewer.getCanvas();
-//		drawingPane.clipContentProperty().set(true);
 		paneDraw.getChildren().add(drawingPane);
 		paneDraw.setPrefHeight(2000);
 		AnchorPane.setTopAnchor(drawingPane, 10d);

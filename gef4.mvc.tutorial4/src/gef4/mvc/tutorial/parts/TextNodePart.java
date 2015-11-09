@@ -119,11 +119,6 @@ public class TextNodePart extends AbstractFXContentPart<Group> implements Proper
 		}
 	}
 
-	public void translate( double x, double y ){
-		Point pos = getContent().getPosition();
-		getContent().setPosition( new Point( pos.x + x, pos.y + y ) );
-	}
-
 	public void setPosition(Point newPos) {
 		getContent().setPosition( newPos );
 	}

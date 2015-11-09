@@ -16,20 +16,19 @@ import javafx.scene.Node;
 
 public class ChangeTextNodePositionOperation extends AbstractOperation implements ITransactionalOperation {
 
-	TextNodePart part;
+	private TextNodePart part;
 	private Point oldPos;
 	private Point newPos;
-	public ChangeTextNodePositionOperation(IVisualPart<Node, ? extends Node> part, Point oldPos, Point newPos) {
+	public ChangeTextNodePositionOperation(TextNodePart part, Point oldPos, Point newPos) {
 		super( "Change TextNode Position" );
 		this.oldPos = oldPos;
 		this.newPos = newPos;
-		Assert.isLegal(part instanceof TextNodePart, "Only TestNodePart supported for ChangeItemPositionOperation");
-		this.part = (TextNodePart) part;
+		this.part = part;
 	}
+
 
 	@Override
 	public IStatus execute(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-		// tell the part, which updates the model, will also trigger a doRefreshVisuals
 		part.setPosition(newPos); 
 		return Status.OK_STATUS;
 	}
