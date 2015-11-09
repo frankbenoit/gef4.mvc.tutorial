@@ -38,6 +38,9 @@ Tutorial 6
 ==========
 
 Undo and redo, via button and keyboard Ctrl+Z/Y  
+http://fbenoit.blogspot.de/2015/11/gef4-tutorial-part-6-undo-redo.html
+
+
 
 Future Ideas
 ==========
