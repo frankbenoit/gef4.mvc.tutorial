@@ -3,7 +3,7 @@ package gef4.mvc.tutorial.parts;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import org.eclipse.gef4.fx.nodes.FXGeometryNode;
+import org.eclipse.gef4.fx.nodes.GeometryNode;
 import org.eclipse.gef4.geometry.planar.Dimension;
 import org.eclipse.gef4.geometry.planar.Rectangle;
 import org.eclipse.gef4.geometry.planar.RoundedRectangle;
@@ -22,7 +22,7 @@ import javafx.scene.text.Text;
 public class TextNodePart extends AbstractFXContentPart<Group> implements PropertyChangeListener {
 
 	private Text text;
-	private FXGeometryNode<RoundedRectangle> fxRoundedRectNode;
+	private GeometryNode<RoundedRectangle> fxRoundedRectNode;
 
 	@Override
 	protected void doActivate() {
@@ -46,7 +46,7 @@ public class TextNodePart extends AbstractFXContentPart<Group> implements Proper
 	protected Group createVisual() {
 		Group group = new Group();
 		text = new Text();
-		fxRoundedRectNode = new FXGeometryNode<>();
+		fxRoundedRectNode = new GeometryNode<>();
 		
 		group.getChildren().add(fxRoundedRectNode);
 		group.getChildren().add(text);

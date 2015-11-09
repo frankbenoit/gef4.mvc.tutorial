@@ -94,8 +94,8 @@ public final class GuiceModule extends MvcFxModule {
 	protected void bindAbstractRootPartAdapters(MapBinder<AdapterKey<?>, Object> adapterMapBinder) {
 		super.bindAbstractRootPartAdapters(adapterMapBinder);
 		adapterMapBinder
-		.addBinding( AdapterKey.get( FXTypeTool.TOOL_POLICY_KEY, "GlobalOnTypePolicy"))
-		.to( GlobalOnTypePolicy.class);
+			.addBinding( AdapterKey.get( FXTypeTool.TOOL_POLICY_KEY, "GlobalOnTypePolicy"))
+			.to( GlobalOnTypePolicy.class);
 	}
 	
 	@Override

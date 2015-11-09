@@ -1,6 +1,6 @@
 package gef4.mvc.tutorial.parts;
 
-import org.eclipse.gef4.fx.nodes.FXGeometryNode;
+import org.eclipse.gef4.fx.nodes.GeometryNode;
 import org.eclipse.gef4.geometry.planar.Dimension;
 import org.eclipse.gef4.geometry.planar.Rectangle;
 import org.eclipse.gef4.geometry.planar.RoundedRectangle;
@@ -48,12 +48,12 @@ public class ModelPart extends AbstractFXContentPart<Group> {
 		// the rounded rectangle
 		{
 			RoundedRectangle roundRect = new RoundedRectangle( bounds, 10, 10 );
-			FXGeometryNode<RoundedRectangle> fxGeometryNode = new FXGeometryNode<>(roundRect);
-			fxGeometryNode.setFill( model.getColor() );
-			fxGeometryNode.setStroke( Color.BLACK );
-			fxGeometryNode.setStrokeWidth(2);
+			GeometryNode<RoundedRectangle> GeometryNode = new GeometryNode<>(roundRect);
+			GeometryNode.setFill( model.getColor() );
+			GeometryNode.setStroke( Color.BLACK );
+			GeometryNode.setStrokeWidth(2);
 			
-			visual.getChildren().add( fxGeometryNode );
+			visual.getChildren().add( GeometryNode );
 		}
 		// the text
 		{

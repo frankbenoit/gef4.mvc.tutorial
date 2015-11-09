@@ -4,7 +4,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.gef4.fx.nodes.FXGeometryNode;
+import org.eclipse.gef4.fx.nodes.GeometryNode;
 import org.eclipse.gef4.geometry.planar.Point;
 import org.eclipse.gef4.geometry.planar.Rectangle;
 import org.eclipse.gef4.geometry.planar.RoundedRectangle;
@@ -30,7 +30,7 @@ import javafx.scene.transform.Affine;
 public class TextNodePart extends AbstractFXContentPart<StackPane> implements PropertyChangeListener {
 
 	private Text text;
-	private FXGeometryNode<RoundedRectangle> fxRoundedRectNode;
+	private GeometryNode<RoundedRectangle> fxRoundedRectNode;
 
 	private boolean isEditing = false;
 	private TextField editText;
@@ -67,7 +67,7 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 	protected StackPane createVisual() {
 		StackPane group = new StackPane();
 		text = new Text();
-		fxRoundedRectNode = new FXGeometryNode<>();
+		fxRoundedRectNode = new GeometryNode<>();
 		editText = new TextField();
 		
 		editText.setManaged(false);
