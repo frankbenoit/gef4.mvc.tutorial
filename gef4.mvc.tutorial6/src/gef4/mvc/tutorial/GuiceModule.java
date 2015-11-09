@@ -17,6 +17,8 @@ import org.eclipse.gef4.mvc.parts.IContentPartFactory;
 
 import com.google.common.reflect.TypeToken;
 import com.google.inject.Provider;
+import com.google.inject.Scope;
+import com.google.inject.Scopes;
 import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.MapBinder;
 
@@ -81,6 +83,10 @@ public final class GuiceModule extends MvcFxModule {
 			.addBinding( AdapterKey.get( FXTypeTool.TOOL_POLICY_KEY, "TextNodeOnTypePolicy"))
 			.to( TextNodeOnTypePolicy.class);
 
+		adapterMapBinder
+			.addBinding( AdapterKey.get( FXTypeTool.TOOL_POLICY_KEY, "GlobalOnTypePolicy"))
+			.to( GlobalOnTypePolicy.class);
+
 	}
 
 	@Override
@@ -102,6 +108,10 @@ public final class GuiceModule extends MvcFxModule {
 	protected void configure() {
 		super.configure();
 
+		binder()
+			.bind(GlobalOnTypePolicy.class )
+			.in(Scopes.SINGLETON);
+		
 		binder()
 			.bind(new TypeLiteral<IContentPartFactory<Node>>(){})
 			.toInstance(new ModelPartFactory());
