@@ -11,10 +11,7 @@
  *******************************************************************************/
 package gef4.mvc.tutorial.policies;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
-import org.eclipse.gef4.geometry.planar.Point;
+import org.eclipse.gef4.fx.nodes.InfiniteCanvas;
 import org.eclipse.gef4.mvc.fx.policies.AbstractFXOnClickPolicy;
 import org.eclipse.gef4.mvc.fx.viewer.FXViewer;
 import org.eclipse.gef4.mvc.parts.IContentPart;
@@ -25,7 +22,6 @@ import org.eclipse.gef4.mvc.viewer.IViewer;
 import com.google.common.collect.HashMultimap;
 
 import gef4.mvc.tutorial.model.TextNode;
-import javafx.event.EventTarget;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -58,12 +54,16 @@ public class FXCreationMenuOnClickPolicy extends AbstractFXOnClickPolicy {
 	public void click(MouseEvent e) {
 		// open menu on right click
 		if (MouseButton.SECONDARY.equals(e.getButton())) {
-			EventTarget target = e.getTarget();
-			if (target instanceof Node) {
-				Node t = (Node) target;
-				initialMousePositionInScreen = new Point2D(e.getScreenX(), e.getScreenY());
-//				.screenToLocal()
-				initialMousePositionInScene = getViewer().getCanvas().getContentGroup().screenToLocal(initialMousePositionInScreen);
+			
+			initialMousePositionInScreen = new Point2D(e.getScreenX(), e.getScreenY());
+			
+			// use the viewer to transform into local coordinates
+			// this works even if the viewer is scrolled and/or zoomed.
+			InfiniteCanvas infiniteCanvas = getViewer().getCanvas();
+			initialMousePositionInScene = infiniteCanvas.getContentGroup().screenToLocal(initialMousePositionInScreen);
+			
+			// only open if the even was on the visible canvas
+			if( infiniteCanvas.getBoundsInLocal().contains(initialMousePositionInScene) ){
 				openMenu(e);
 			}
 		}
@@ -74,36 +74,27 @@ public class FXCreationMenuOnClickPolicy extends AbstractFXOnClickPolicy {
 	}
 
 	private void openMenu(final MouseEvent me) {
-		System.out.println("FXCreationMenuOnClickPolicy.openMenu()");
-		
-		
-		try {
-			popup = new Popup(); 
-	
-			popup.autoFixProperty().set(true);
-			popup.autoHideProperty().set(true);
-			popup.setX(initialMousePositionInScreen.getX()); 
-			popup.setY(initialMousePositionInScreen.getY());
-	
-			HBox hb = new HBox();
-			hb.setStyle("-fx-border-width: 1px; -fx-border-color: DIMGRAY; -fx-background-color: lightgray" );
-//			hb.setPrefSize( 100, 50 );
-			Button first = new Button();
-			first.setOnAction(e-> this.addTextNode() );
-			ImageView iv = new ImageView( new Image(new FileInputStream( "images/AddTextNode.png")));
-			iv.autosize();
-			first.setGraphic(iv);
-			hb.getChildren().add( first );
-			hb.setEffect( new DropShadow( 4, 4, 2, Color.GRAY ) );
-			hb.setSpacing( 4 );
-			hb.setPadding( new Insets( 4, 4, 4, 4));
-			popup.getContent().addAll( hb );
-			popup.show(getViewer().getScene().getWindow());
-		
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		}
+		popup = new Popup(); 
 
+		popup.autoFixProperty().set(true);
+		popup.autoHideProperty().set(true);
+		popup.setX(initialMousePositionInScreen.getX()); 
+		popup.setY(initialMousePositionInScreen.getY());
+
+		HBox hb = new HBox();
+		hb.setStyle("-fx-border-width: 1px; -fx-border-color: DIMGRAY; -fx-background-color: lightgray" );
+		Button first = new Button();
+		first.setOnAction(e-> this.addTextNode() );
+		ImageView iv = new ImageView( new Image(FXCreationMenuOnClickPolicy.class.getResourceAsStream("AddTextNode.png")));
+		iv.autosize();
+		first.setGraphic(iv);
+		hb.getChildren().add( first );
+		hb.setEffect( new DropShadow( 4, 4, 2, Color.GRAY ) );
+		hb.setSpacing( 4 );
+		hb.setPadding( new Insets( 4, 4, 4, 4));
+		popup.getContent().addAll( hb );
+		popup.show(getViewer().getScene().getWindow());
+		
 	}
 
 	private void addTextNode(){
