@@ -1,9 +1,13 @@
 package gef4.mvc.tutorial.parts;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.gef4.mvc.fx.parts.AbstractFXContentPart;
 import org.eclipse.gef4.mvc.parts.IVisualPart;
+
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.SetMultimap;
 
 import gef4.mvc.tutorial.model.Model;
 import gef4.mvc.tutorial.model.TextNode;
@@ -39,4 +43,9 @@ public class ModelPart extends AbstractFXContentPart<Group> {
 		Node visual = child.getVisual();
 		children.add(visual);
 	}
+	@Override
+	public SetMultimap<? extends Object, String> getContentAnchorages() {
+		return HashMultimap.create();
+	}
+
 }

@@ -2,6 +2,8 @@ package gef4.mvc.tutorial.parts;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.gef4.fx.nodes.GeometryNode;
@@ -12,6 +14,9 @@ import org.eclipse.gef4.mvc.domain.IDomain;
 import org.eclipse.gef4.mvc.fx.parts.AbstractFXContentPart;
 import org.eclipse.gef4.mvc.fx.policies.FXTransformPolicy;
 import org.eclipse.gef4.mvc.models.FocusModel;
+
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.SetMultimap;
 
 import gef4.mvc.tutorial.model.TextNode;
 import gef4.mvc.tutorial.policies.ChangeTextNodeTextOperation;
@@ -174,14 +179,8 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 		if( commit ){
 			String newText = editText.getText();
 			text.setText(newText);
-			try {
-				IDomain<Node> domain = getViewer().getDomain();
-				ChangeTextNodeTextOperation op = new ChangeTextNodeTextOperation(this, getContent().getText(), newText);
-				op.addContext(domain.getUndoContext());
-				domain.getOperationHistory().execute(op, null, null);
-			} catch (ExecutionException e) {
-				e.printStackTrace();
-			}
+			ChangeTextNodeTextOperation op = new ChangeTextNodeTextOperation(this, getContent().getText(), newText);
+			getViewer().getDomain().execute(op);
 		}
 		isEditing = false;
 		setVisualsForEditing();
@@ -196,6 +195,16 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 	}
 	public boolean isEditing() {
 		return isEditing;
+	}
+
+	@Override
+	public SetMultimap<? extends Object, String> getContentAnchorages() {
+		return HashMultimap.create();
+	}
+
+	@Override
+	public List<? extends Object> getContentChildren() {
+		return Collections.emptyList();
 	}
 
 }

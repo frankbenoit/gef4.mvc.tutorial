@@ -2,6 +2,8 @@ package gef4.mvc.tutorial.parts;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.gef4.fx.nodes.GeometryNode;
 import org.eclipse.gef4.geometry.planar.Dimension;
@@ -10,6 +12,9 @@ import org.eclipse.gef4.geometry.planar.Rectangle;
 import org.eclipse.gef4.geometry.planar.RoundedRectangle;
 import org.eclipse.gef4.mvc.fx.parts.AbstractFXContentPart;
 import org.eclipse.gef4.mvc.fx.policies.FXTransformPolicy;
+
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.SetMultimap;
 
 import gef4.mvc.tutorial.model.TextNode;
 import javafx.geometry.Bounds;
@@ -121,6 +126,16 @@ public class TextNodePart extends AbstractFXContentPart<Group> implements Proper
 
 	public void setPosition(Point newPos) {
 		getContent().setPosition( newPos );
+	}
+
+	@Override
+	public SetMultimap<? extends Object, String> getContentAnchorages() {
+		return HashMultimap.create();
+	}
+
+	@Override
+	public List<? extends Object> getContentChildren() {
+		return Collections.emptyList();
 	}
 	
 }
