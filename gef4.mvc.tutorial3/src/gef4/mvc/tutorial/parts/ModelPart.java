@@ -1,6 +1,5 @@
 package gef4.mvc.tutorial.parts;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.gef4.mvc.fx.parts.AbstractFXContentPart;

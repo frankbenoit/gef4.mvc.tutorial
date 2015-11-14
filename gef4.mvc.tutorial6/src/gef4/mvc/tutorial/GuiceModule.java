@@ -17,17 +17,16 @@ import org.eclipse.gef4.mvc.parts.IContentPartFactory;
 
 import com.google.common.reflect.TypeToken;
 import com.google.inject.Provider;
-import com.google.inject.Scope;
 import com.google.inject.Scopes;
 import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.MapBinder;
 
 import gef4.mvc.tutorial.parts.ModelPartFactory;
 import gef4.mvc.tutorial.parts.TextNodePart;
-import gef4.mvc.tutorial.policies.TextNodeTransformPolicy;
 import gef4.mvc.tutorial.policies.GlobalOnTypePolicy;
 import gef4.mvc.tutorial.policies.TextNodeOnDoubleClickPolicy;
 import gef4.mvc.tutorial.policies.TextNodeOnTypePolicy;
+import gef4.mvc.tutorial.policies.TextNodeTransformPolicy;
 import javafx.scene.Node;
 
 @SuppressWarnings("serial")

@@ -2,17 +2,14 @@ package gef4.mvc.tutorial.policies;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.operations.AbstractOperation;
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.gef4.geometry.planar.Point;
 import org.eclipse.gef4.mvc.operations.ITransactionalOperation;
-import org.eclipse.gef4.mvc.parts.IVisualPart;
 
 import gef4.mvc.tutorial.parts.TextNodePart;
-import javafx.scene.Node;
 
 public class ChangeTextNodePositionOperation extends AbstractOperation implements ITransactionalOperation {
 
