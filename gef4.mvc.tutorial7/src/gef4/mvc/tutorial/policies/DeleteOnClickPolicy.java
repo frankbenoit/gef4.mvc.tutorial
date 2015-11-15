@@ -20,7 +20,7 @@ import org.eclipse.gef4.mvc.policies.DeletionPolicy;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 
-public class FXDeleteFirstAnchorageOnClickPolicy extends AbstractFXOnClickPolicy {
+public class DeleteOnClickPolicy extends AbstractFXOnClickPolicy {
 
 	@Override
 	public void click(MouseEvent e) {

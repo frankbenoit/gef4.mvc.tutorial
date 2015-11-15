@@ -27,8 +27,8 @@ import gef4.mvc.tutorial.parts.ContentPartFactory;
 import gef4.mvc.tutorial.parts.FXDeleteHoverHandlePart;
 import gef4.mvc.tutorial.parts.HandlePartFactory;
 import gef4.mvc.tutorial.parts.TextNodePart;
-import gef4.mvc.tutorial.policies.FXCreationMenuOnClickPolicy;
-import gef4.mvc.tutorial.policies.FXDeleteFirstAnchorageOnClickPolicy;
+import gef4.mvc.tutorial.policies.CreationMenuOnClickPolicy;
+import gef4.mvc.tutorial.policies.DeleteOnClickPolicy;
 import gef4.mvc.tutorial.policies.GlobalOnTypePolicy;
 import gef4.mvc.tutorial.policies.TextNodeOnDoubleClickPolicy;
 import gef4.mvc.tutorial.policies.TextNodeOnTypePolicy;
@@ -102,7 +102,7 @@ public final class GuiceModule extends MvcFxModule {
 
 		adapterMapBinder
 			.addBinding(AdapterKey.get(FXClickDragTool.CLICK_TOOL_POLICY_KEY, "FXCreationMenuOnClick"))
-			.to(FXCreationMenuOnClickPolicy.class);
+			.to(CreationMenuOnClickPolicy.class);
 		
 		// interaction policy to delete on key type
 		adapterMapBinder.addBinding(AdapterKey.get(FXTypeTool.TOOL_POLICY_KEY))
@@ -119,7 +119,7 @@ public final class GuiceModule extends MvcFxModule {
 	protected void bindFXDeleteHandlePartAdapters( MapBinder<AdapterKey<?>, Object> adapterMapBinder) {
 		adapterMapBinder
 				.addBinding(AdapterKey.get(FXClickDragTool.CLICK_TOOL_POLICY_KEY, "delete"))
-				.to(FXDeleteFirstAnchorageOnClickPolicy.class);
+				.to(DeleteOnClickPolicy.class);
 	}
 
 

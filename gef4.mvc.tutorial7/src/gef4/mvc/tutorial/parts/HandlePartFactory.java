@@ -30,34 +30,6 @@ public class HandlePartFactory extends FXDefaultHandlePartFactory {
 	@Inject
 	private Injector injector;
 
-//	@Override
-//	public IHandlePart<Node, ? extends Node> createCurveSelectionHandlePart(
-//			final IVisualPart<Node, ? extends Node> targetPart,
-//			final Provider<BezierCurve[]> segmentsProvider,
-//			int segmentCount,
-//			int segmentIndex,
-//			double segmentParameter) {
-//		final FXCircleSegmentHandlePart part = (FXCircleSegmentHandlePart) super.createCurveSelectionHandlePart(
-//				targetPart, segmentsProvider, segmentCount, segmentIndex,
-//				segmentParameter);
-//		injector.injectMembers(part);
-//
-//		if (segmentIndex + segmentParameter > 0
-//				&& segmentIndex + segmentParameter < segmentCount) {
-//			// make way points (middle segment vertices) draggable
-//			// TODO: binding the following policy requires dynamic binding
-//			part.setAdapter(AdapterKey.get(AbstractFXOnDragPolicy.class),
-//					new FXBendOnSegmentHandleDragPolicy());
-//		} else {
-//			// make end points reconnectable
-//			// TODO: binding the following policy requires dynamic binding
-//			part.setAdapter(AdapterKey.get(AbstractFXOnDragPolicy.class),
-//					new FXBendOnSegmentHandleDragPolicy());
-//		}
-//
-//		return part;
-//	}
-
 	@Override
 	protected List<IHandlePart<Node, ? extends Node>> createHoverHandleParts(
 			IVisualPart<Node, ? extends Node> target,

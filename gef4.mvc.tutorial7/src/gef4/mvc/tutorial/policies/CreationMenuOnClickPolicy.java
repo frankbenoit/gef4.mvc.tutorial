@@ -36,7 +36,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Popup;
 
 // TODO: only applicable for FXRootPart and FXViewer
-public class FXCreationMenuOnClickPolicy extends AbstractFXOnClickPolicy {
+public class CreationMenuOnClickPolicy extends AbstractFXOnClickPolicy {
 
 	/**
 	 * The adapter role for the
@@ -85,7 +85,7 @@ public class FXCreationMenuOnClickPolicy extends AbstractFXOnClickPolicy {
 		hb.setStyle("-fx-border-width: 1px; -fx-border-color: DIMGRAY; -fx-background-color: lightgray" );
 		Button first = new Button();
 		first.setOnAction(e-> this.addTextNode() );
-		ImageView iv = new ImageView( new Image(FXCreationMenuOnClickPolicy.class.getResourceAsStream("AddTextNode.png")));
+		ImageView iv = new ImageView( new Image(CreationMenuOnClickPolicy.class.getResourceAsStream("AddTextNode.png")));
 		iv.autosize();
 		first.setGraphic(iv);
 		hb.getChildren().add( first );
@@ -103,17 +103,15 @@ public class FXCreationMenuOnClickPolicy extends AbstractFXOnClickPolicy {
 		IViewer<Node> viewer = root.getViewer();
 
 		TextNode textNode = new TextNode( initialMousePositionInScene.getX(), initialMousePositionInScene.getY(), "A" );
-		
 		IContentPart<Node, ? extends Node> contentPartModel = getHost().getRoot().getContentPartChildren().get(0);
 		
 		// build create operation
-		CreationPolicy<Node> creationPolicy = root
-				.<CreationPolicy<Node>> getAdapter(CreationPolicy.class);
+		CreationPolicy<Node> creationPolicy = root.getAdapter(CreationPolicy.class);
 		creationPolicy.init();
 		creationPolicy.create(
 				textNode, 
 				contentPartModel, 
-				HashMultimap .<IContentPart<Node, ? extends Node>, String> create());
+				HashMultimap.create());
 
 		// execute on stack
 		viewer.getDomain().execute(creationPolicy.commit());
