@@ -65,7 +65,6 @@ public final class GuiceModule extends MvcFxModule {
 		adapterMapBinder
 			.addBinding(AdapterKey.get(FXTransformPolicy.class))
 			.to(TextNodeTransformPolicy.class);
-			//.to(FXTransformPolicy.class);
 		
 		// interaction policies to relocate on drag (including anchored elements, which are linked)
 		adapterMapBinder
@@ -85,13 +84,6 @@ public final class GuiceModule extends MvcFxModule {
 		adapterMapBinder
 			.addBinding( AdapterKey.get( FXTypeTool.TOOL_POLICY_KEY, "GlobalOnTypePolicy"))
 			.to( GlobalOnTypePolicy.class);
-
-	}
-
-	@Override
-	protected void bindAbstractViewerAdapters(MapBinder<AdapterKey<?>, Object> adapterMapBinder) {
-		super.bindAbstractViewerAdapters(adapterMapBinder);
-		
 
 	}
 
