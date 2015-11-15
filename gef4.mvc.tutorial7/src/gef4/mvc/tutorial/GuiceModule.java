@@ -106,7 +106,6 @@ public final class GuiceModule extends MvcFxModule {
 		adapterMapBinder
 			.addBinding(AdapterKey.get(FXClickDragTool.CLICK_TOOL_POLICY_KEY, "FXCreationMenuOnClick"))
 			.to(CreationMenuOnClickPolicy.class);
-		
 	}
 
 	@Override
@@ -116,7 +115,7 @@ public final class GuiceModule extends MvcFxModule {
 			.toInstance(new HandlePartFactory());
 	}
 
-	protected void bindFXDeleteHandlePartAdapters( MapBinder<AdapterKey<?>, Object> adapterMapBinder) {
+	protected void bindDeleteHoverHandlePartAdapters( MapBinder<AdapterKey<?>, Object> adapterMapBinder) {
 		adapterMapBinder
 				.addBinding(AdapterKey.get(FXClickDragTool.CLICK_TOOL_POLICY_KEY, "delete"))
 				.to(DeleteOnClickPolicy.class);
@@ -138,7 +137,7 @@ public final class GuiceModule extends MvcFxModule {
 		bindTextNodePartAdapters(
 			AdapterMaps.getAdapterMapBinder(binder(), TextNodePart.class));
 		
-		bindFXDeleteHandlePartAdapters(
+		bindDeleteHoverHandlePartAdapters(
 			AdapterMaps.getAdapterMapBinder(binder(), DeleteHoverHandlePart.class));
 
 	}

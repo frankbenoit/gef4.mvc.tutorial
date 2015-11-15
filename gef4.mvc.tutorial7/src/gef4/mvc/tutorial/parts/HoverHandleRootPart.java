@@ -41,18 +41,15 @@ public class HoverHandleRootPart extends AbstractFXHandlePart<VBox> {
 	}
 
 	@Override
-	protected void addChildVisual(IVisualPart<Node, ? extends Node> child,
-			int index) {
+	protected void addChildVisual(IVisualPart<Node, ? extends Node> child, int index) {
 		getVisual().getChildren().add(index, child.getVisual());
-		for (Entry<IVisualPart<Node, ? extends Node>, String> anchorage : getAnchorages()
-				.entries()) {
+		for (Entry<IVisualPart<Node, ? extends Node>, String> anchorage : getAnchorages().entries()) {
 			child.addAnchorage(anchorage.getKey(), anchorage.getValue());
 		}
 	}
 
 	@Override
-	protected void attachToAnchorageVisual(
-			IVisualPart<Node, ? extends Node> anchorage, String role) {
+	protected void attachToAnchorageVisual( IVisualPart<Node, ? extends Node> anchorage, String role) {
 		super.attachToAnchorageVisual(anchorage, role);
 		for (IVisualPart<Node, ? extends Node> child : getChildren()) {
 			child.addAnchorage(anchorage, role);
@@ -67,8 +64,7 @@ public class HoverHandleRootPart extends AbstractFXHandlePart<VBox> {
 	}
 
 	@Override
-	protected void detachFromAnchorageVisual(
-			IVisualPart<Node, ? extends Node> anchorage, String role) {
+	protected void detachFromAnchorageVisual( IVisualPart<Node, ? extends Node> anchorage, String role) {
 		super.detachFromAnchorageVisual(anchorage, role);
 		for (IVisualPart<Node, ? extends Node> child : getChildren()) {
 			child.removeAnchorage(anchorage, role);
@@ -84,8 +80,7 @@ public class HoverHandleRootPart extends AbstractFXHandlePart<VBox> {
 		}
 
 		// determine center location of host visual
-		IVisualPart<Node, ? extends Node> anchorage = anchorages.keys()
-				.iterator().next();
+		IVisualPart<Node, ? extends Node> anchorage = anchorages.keys().iterator().next();
 		refreshHandleLocation(anchorage.getVisual());
 	}
 
@@ -103,8 +98,7 @@ public class HoverHandleRootPart extends AbstractFXHandlePart<VBox> {
 	}
 
 	@Override
-	protected void removeChildVisual(IVisualPart<Node, ? extends Node> child,
-			int index) {
+	protected void removeChildVisual(IVisualPart<Node, ? extends Node> child, int index) {
 		getVisual().getChildren().remove(index);
 	}
 
