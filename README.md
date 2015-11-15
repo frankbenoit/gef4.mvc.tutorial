@@ -42,14 +42,20 @@ Undo and redo, via button and keyboard Ctrl+Z/Y
 http://fbenoit.blogspot.de/2015/11/gef4-tutorial-part-6-undo-redo.html
 
 
+Tutorial 7
+==========
+
+Add via palette. Remove node with keyboard and handle tool.
+
+
+
 
 Future Ideas
 ==========
 
- - Undo/Redo
  - Layout
  - Connections
- - Add/duplicate
+ - duplicate
  - navigate selection by keyboard
  
 
