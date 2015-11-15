@@ -62,7 +62,7 @@ public class ModelPart extends AbstractFXContentPart<Group> implements PropertyC
 	
 	@Override
 	protected void doAddContentChild(Object contentChild, int index) {
-		getContent().addNode( (TextNode) contentChild );
+		getContent().addNode( (TextNode) contentChild, index );
 	}
 	
 	@Override

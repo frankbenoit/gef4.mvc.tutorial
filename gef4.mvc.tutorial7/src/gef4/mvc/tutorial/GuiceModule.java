@@ -90,6 +90,9 @@ public final class GuiceModule extends MvcFxModule {
 			.addBinding( AdapterKey.get( FXTypeTool.TOOL_POLICY_KEY, "GlobalOnTypePolicy"))
 			.to( GlobalOnTypePolicy.class);
 
+		// interaction policy to delete on key type
+		adapterMapBinder.addBinding(AdapterKey.get(FXTypeTool.TOOL_POLICY_KEY))
+			.to(FXDeleteSelectedOnTypePolicy.class);
 	}
 
 	@Override
@@ -104,9 +107,6 @@ public final class GuiceModule extends MvcFxModule {
 			.addBinding(AdapterKey.get(FXClickDragTool.CLICK_TOOL_POLICY_KEY, "FXCreationMenuOnClick"))
 			.to(CreationMenuOnClickPolicy.class);
 		
-		// interaction policy to delete on key type
-		adapterMapBinder.addBinding(AdapterKey.get(FXTypeTool.TOOL_POLICY_KEY))
-			.to(FXDeleteSelectedOnTypePolicy.class);
 	}
 
 	@Override

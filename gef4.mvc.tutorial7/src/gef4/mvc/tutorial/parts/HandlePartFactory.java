@@ -50,8 +50,7 @@ public class HandlePartFactory extends FXDefaultHandlePartFactory {
 
 			return handles;
 		}
-		return super.createHoverHandleParts(target, contextBehavior,
-				contextMap);
+		return super.createHoverHandleParts(target, contextBehavior, contextMap);
 	}
 
 }

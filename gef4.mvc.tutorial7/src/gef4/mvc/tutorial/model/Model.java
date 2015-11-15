@@ -31,8 +31,12 @@ public class Model implements IPropertyChangeNotifier {
 	}
 
 	public void addNode(TextNode textNode) {
+		int atIndex = nodes.size();
+		addNode( textNode, atIndex );
+	}
+	public void addNode(TextNode textNode, int atIndex ) {
 		LinkedList<TextNode> oldNodes = new LinkedList<>(nodes);
-		nodes.add( textNode );
+		nodes.add( atIndex, textNode );
 		pcs.firePropertyChange("nodes", oldNodes, nodes );
 	}
 	
