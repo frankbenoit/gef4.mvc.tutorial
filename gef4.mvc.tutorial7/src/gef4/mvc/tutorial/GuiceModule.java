@@ -24,7 +24,7 @@ import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.MapBinder;
 
 import gef4.mvc.tutorial.parts.ContentPartFactory;
-import gef4.mvc.tutorial.parts.FXDeleteHoverHandlePart;
+import gef4.mvc.tutorial.parts.DeleteHoverHandlePart;
 import gef4.mvc.tutorial.parts.HandlePartFactory;
 import gef4.mvc.tutorial.parts.TextNodePart;
 import gef4.mvc.tutorial.policies.CreationMenuOnClickPolicy;
@@ -139,7 +139,7 @@ public final class GuiceModule extends MvcFxModule {
 			AdapterMaps.getAdapterMapBinder(binder(), TextNodePart.class));
 		
 		bindFXDeleteHandlePartAdapters(
-			AdapterMaps.getAdapterMapBinder(binder(), FXDeleteHoverHandlePart.class));
+			AdapterMaps.getAdapterMapBinder(binder(), DeleteHoverHandlePart.class));
 
 	}
 }

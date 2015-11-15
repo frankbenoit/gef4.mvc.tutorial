@@ -17,14 +17,14 @@ import javafx.scene.image.Image;
 
 import org.eclipse.gef4.fx.nodes.HoverOverlayImageView;
 
-public class FXDeleteHoverHandlePart extends AbstractLogoHoverHandlePart<HoverOverlayImageView> {
+public class DeleteHoverHandlePart extends AbstractLogoHoverHandlePart<HoverOverlayImageView> {
 
 	public static final String IMG_DELETE = "delete_obj.gif";
 	public static final String IMG_DELETE_DISABLED = "delete_obj_disabled.gif";
 
 	@Override
 	protected HoverOverlayImageView createVisual() {
-		URL overlayImageResource = FXDeleteHoverHandlePart.class
+		URL overlayImageResource = DeleteHoverHandlePart.class
 				.getResource(IMG_DELETE);
 		if (overlayImageResource == null) {
 			throw new IllegalStateException(
@@ -32,7 +32,7 @@ public class FXDeleteHoverHandlePart extends AbstractLogoHoverHandlePart<HoverOv
 		}
 		Image overlayImage = new Image(overlayImageResource.toExternalForm());
 
-		URL baseImageResource = FXDeleteHoverHandlePart.class
+		URL baseImageResource = DeleteHoverHandlePart.class
 				.getResource(IMG_DELETE_DISABLED);
 		if (baseImageResource == null) {
 			throw new IllegalStateException(

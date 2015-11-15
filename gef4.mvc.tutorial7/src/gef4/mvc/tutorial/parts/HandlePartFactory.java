@@ -40,11 +40,11 @@ public class HandlePartFactory extends FXDefaultHandlePartFactory {
 		
 		if (target instanceof TextNodePart) {
 			// create root handle part
-			FXHoverHandleRootPart parentHp = new FXHoverHandleRootPart();
+			HoverHandleRootPart parentHp = new HoverHandleRootPart();
 			injector.injectMembers(parentHp);
 			handles.add(parentHp);
 
-			FXDeleteHoverHandlePart deleteHp = new FXDeleteHoverHandlePart();
+			DeleteHoverHandlePart deleteHp = new DeleteHoverHandlePart();
 			injector.injectMembers(deleteHp);
 			parentHp.addChild(deleteHp);
 

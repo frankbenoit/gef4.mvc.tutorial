@@ -28,9 +28,9 @@ import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
-public class FXHoverHandleRootPart extends AbstractFXHandlePart<VBox> {
+public class HoverHandleRootPart extends AbstractFXHandlePart<VBox> {
 
-	public FXHoverHandleRootPart() {
+	public HoverHandleRootPart() {
 		setAdapter(AdapterKey.get(FXHoverTool.TOOL_POLICY_KEY),
 				new FXHoverOnHoverPolicy() {
 					@Override
