@@ -44,7 +44,7 @@ public class HoverHandleRootPart extends AbstractFXHandlePart<VBox> {
 	protected void addChildVisual(IVisualPart<Node, ? extends Node> child, int index) {
 		getVisual().getChildren().add(index, child.getVisual());
 		for (Entry<IVisualPart<Node, ? extends Node>, String> anchorage : getAnchorages().entries()) {
-			child.addAnchorage(anchorage.getKey(), anchorage.getValue());
+			child.attachToAnchorage(anchorage.getKey(), anchorage.getValue());
 		}
 	}
 
@@ -52,7 +52,7 @@ public class HoverHandleRootPart extends AbstractFXHandlePart<VBox> {
 	protected void attachToAnchorageVisual( IVisualPart<Node, ? extends Node> anchorage, String role) {
 		super.attachToAnchorageVisual(anchorage, role);
 		for (IVisualPart<Node, ? extends Node> child : getChildren()) {
-			child.addAnchorage(anchorage, role);
+			child.attachToAnchorage(anchorage, role);
 		}
 	}
 
@@ -67,7 +67,7 @@ public class HoverHandleRootPart extends AbstractFXHandlePart<VBox> {
 	protected void detachFromAnchorageVisual( IVisualPart<Node, ? extends Node> anchorage, String role) {
 		super.detachFromAnchorageVisual(anchorage, role);
 		for (IVisualPart<Node, ? extends Node> child : getChildren()) {
-			child.removeAnchorage(anchorage, role);
+			child.detachFromAnchorage(anchorage, role);
 		}
 	}
 
