@@ -6,11 +6,13 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.gef4.fx.nodes.GeometryNode;
+import org.eclipse.gef4.geometry.planar.Dimension;
 import org.eclipse.gef4.geometry.planar.Point;
 import org.eclipse.gef4.geometry.planar.Rectangle;
 import org.eclipse.gef4.geometry.planar.RoundedRectangle;
 import org.eclipse.gef4.mvc.fx.parts.AbstractFXContentPart;
 import org.eclipse.gef4.mvc.fx.policies.FXTransformPolicy;
+import org.eclipse.gef4.mvc.parts.IVisualPart;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
@@ -18,6 +20,7 @@ import com.google.common.collect.SetMultimap;
 import gef4.mvc.tutorial.model.TextNode;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
@@ -90,11 +93,8 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 		text.setStrokeWidth(TEXT_STROKE_WIDTH);
 
 		// measure size
-		Bounds textBounds = msrText(model.getText(), font, TEXT_STROKE_WIDTH );
-
-		Rectangle bounds = new Rectangle( 
-				0, 0, 
-				textBounds.getWidth() + textBounds.getHeight(), textBounds.getHeight() * 1.5 );
+		Dimension size = msrVisual();
+		Rectangle bounds = new Rectangle( 0, 0, size.width, size.height );
 
 		// the rounded rectangle
 		RoundedRectangle roundRect = new RoundedRectangle( bounds, 10, 10 );
@@ -124,6 +124,11 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 		
 	}
 	
+	private Dimension msrVisual() {
+		Bounds textBounds = msrText(getContent().getText(), font, TEXT_STROKE_WIDTH );
+		return new Dimension(textBounds.getWidth() + textBounds.getHeight(), textBounds.getHeight() * 1.5);
+	}
+
 	private Bounds msrText(String string, Font font, int textStrokeWidth) {
 		Text msrText = new Text(string);
 		msrText.setFont( font );
@@ -142,12 +147,11 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 	}
 	
 	@Override
-	public void setContent(Object content) {
-		System.out.println("setContent "+content);
-		super.setContent(content);
-	}
-	@Override
-	public SetMultimap<? extends Object, String> getContentAnchorages() {
+	public SetMultimap<TextNode, String> getContentAnchorages() {
+//		HashMultimap<TextNode, String> res = HashMultimap.create();
+//		for( TextNode c : getContent().childs ){
+//			res.put( c, "child" );
+//		}
 		return HashMultimap.create();
 	}
 
@@ -170,10 +174,10 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 		}
 		
 		
-		Bounds textBounds = msrText(getContent().getText(), font, TEXT_STROKE_WIDTH );
+		Dimension size = msrVisual();
 
-		layoutBounds.setHeight( textBounds.getHeight()*1.5 );
-		layoutBounds.setWidth( textBounds.getWidth() + textBounds.getHeight() );
+		layoutBounds.setHeight( size.height );
+		layoutBounds.setWidth( size.width );
 		
 		if( !getContent().childs.isEmpty() ){
 			layoutBounds.setHeight( Math.max( layoutBounds.getHeight(), childsHeight ));
@@ -183,16 +187,14 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 	}
 	private void layoutPosition( Point p ){
 
-		Bounds textBounds = msrText(getContent().getText(), font, TEXT_STROKE_WIDTH );
-		double rectHeight = textBounds.getHeight()*1.5;
-		double rectWidth = textBounds.getWidth() + textBounds.getHeight();
+		Dimension size = msrVisual();
 		
 		layoutBounds.setX(p.x);
 		layoutBounds.setY(p.y);
 		layoutVisualPosition.x = p.x;
-		layoutVisualPosition.y = p.y + layoutBounds.getHeight() / 2  - rectHeight/2;
+		layoutVisualPosition.y = p.y + layoutBounds.getHeight() / 2  - size.height/2;
 		
-		double x = p.x + rectWidth + LAYOUT_HSPACE;
+		double x = p.x + size.width + LAYOUT_HSPACE;
 		double y = p.y;
 		for( TextNode tn : getContent().childs ){
 			TextNodePart part = (TextNodePart) getViewer().getContentPartMap().get(tn);

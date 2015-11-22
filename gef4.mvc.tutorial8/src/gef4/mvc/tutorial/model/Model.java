@@ -38,6 +38,13 @@ public class Model implements IPropertyChangeNotifier {
 		pcs.removePropertyChangeListener(listener);
 	}
 
+	private void setTextNodeParents(TextNode parent){
+		for( TextNode c : parent.childs ){
+			c.setParent(parent);
+			setTextNodeParents(c);
+		}
+		
+	}
 	public void init(){
 		TreeSet<String> ids = new TreeSet<>();
 		for( TextNode n : allNodes ){
@@ -47,6 +54,7 @@ public class Model implements IPropertyChangeNotifier {
 			n.setModel(this);
 			ensureRegistered(n);
 		}
+		setTextNodeParents(rootNode);
 	}
 
 	public void setRootNode(TextNode rootNode) {

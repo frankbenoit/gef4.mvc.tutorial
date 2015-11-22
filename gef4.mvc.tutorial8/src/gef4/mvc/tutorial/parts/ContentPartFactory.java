@@ -21,7 +21,6 @@ public class ContentPartFactory implements IContentPartFactory<Node> {
 	public IContentPart<Node, ? extends Node> createContentPart(Object content, IBehavior<Node> contextBehavior, Map<Object, Object> contextMap) {
 
 		if (content instanceof TextNode) {
-			System.out.println("ContentPartFactory.createContentPart()");
 			return injector.getInstance(TextNodePart.class);
 		} else {
 			throw new IllegalArgumentException(content.getClass().toString());
