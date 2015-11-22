@@ -39,10 +39,10 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 	private GeometryNode<RoundedRectangle> fxRoundedRectNode;
 	private TextField editText;
 	private static final Color COLOR = Color.LIGHTSKYBLUE;
-	private static final int TEXT_STROKE_WIDTH = 2;
-	private static final double LAYOUT_VSPACE = 20;
-	private static final double LAYOUT_HSPACE = 50;
-	private Font font;
+	private static final int TEXT_STROKE_WIDTH = 1;
+	private static final double LAYOUT_VSPACE = 10;
+	private static final double LAYOUT_HSPACE = 25;
+	private Font font = Font.font("Monospace", FontWeight.BOLD, 25 );
 	
 	@Override
 	protected void doActivate() {
@@ -84,7 +84,6 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 	protected void doRefreshVisual(StackPane visual) {
 		TextNode model = getContent();
 		
-		font = Font.font("Monospace", FontWeight.BOLD, 50 );
 		Color textColor = Color.BLACK;
 		
 		text.setText( model.getText() );
@@ -97,11 +96,11 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 		Rectangle bounds = new Rectangle( 0, 0, size.width, size.height );
 
 		// the rounded rectangle
-		RoundedRectangle roundRect = new RoundedRectangle( bounds, 10, 10 );
+		RoundedRectangle roundRect = new RoundedRectangle( bounds, 4, 4 );
 		fxRoundedRectNode.setGeometry(roundRect);
 		fxRoundedRectNode.setFill( COLOR );
 		fxRoundedRectNode.setStroke( Color.BLACK );
-		fxRoundedRectNode.setStrokeWidth(2);
+		fxRoundedRectNode.setStrokeWidth(1.2);
 		fxRoundedRectNode.toBack();
 
 		text.toFront();
@@ -148,11 +147,10 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 	
 	@Override
 	public SetMultimap<TextNode, String> getContentAnchorages() {
-//		HashMultimap<TextNode, String> res = HashMultimap.create();
-//		for( TextNode c : getContent().childs ){
-//			res.put( c, "child" );
-//		}
-		return HashMultimap.create();
+		HashMultimap<TextNode, String> res = HashMultimap.create();
+		res.put(getContent(), "START");
+		res.put(getContent(), "END");
+		return res;
 	}
 
 	@Override
@@ -218,5 +216,8 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 		}		
 	}
 
+	@Override
+	protected void attachToAnchorageVisual(IVisualPart<Node, ? extends Node> anchorage, String role) {
+	}
 
 }

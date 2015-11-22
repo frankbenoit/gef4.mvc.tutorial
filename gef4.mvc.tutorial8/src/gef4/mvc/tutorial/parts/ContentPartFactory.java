@@ -10,6 +10,7 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 import gef4.mvc.tutorial.model.TextNode;
+import gef4.mvc.tutorial.model.TextNodeRelation;
 import javafx.scene.Node;
 
 public class ContentPartFactory implements IContentPartFactory<Node> {
@@ -22,6 +23,8 @@ public class ContentPartFactory implements IContentPartFactory<Node> {
 
 		if (content instanceof TextNode) {
 			return injector.getInstance(TextNodePart.class);
+		} else if (content instanceof TextNodeRelation) {
+			return injector.getInstance(TextNodeRelationPart.class);
 		} else {
 			throw new IllegalArgumentException(content.getClass().toString());
 		}

@@ -2,6 +2,8 @@ package gef4.mvc.tutorial.model;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.TreeSet;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -68,6 +70,22 @@ public class Model implements IPropertyChangeNotifier {
 
 	public TextNode getRootNode() {
 		return rootNode;
+	}
+
+	public Collection<? extends TextNodeRelation> getAllRelations() {
+		LinkedList<TextNodeRelation> res = new LinkedList<>();
+		addRelations( res, rootNode );
+		return res;
+	}
+
+	private void addRelations(LinkedList<TextNodeRelation> res, TextNode n) {
+		for( TextNode c : n.childs ){
+			TextNodeRelation r = new TextNodeRelation();
+			res.add(r);
+			r.setParent(n);
+			r.setChild(c);
+			addRelations(res, c);
+		}
 	}
 
 

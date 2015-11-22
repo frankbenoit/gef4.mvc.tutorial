@@ -105,13 +105,13 @@ public class Gef4MvcTutorial extends Application {
 		primaryStage.setResizable(true);
 		primaryStage.setWidth(640);
 		primaryStage.setHeight(480);
-		primaryStage.setTitle("GEF4 MVC Tutorial 7 - Remove Node");
+		primaryStage.setTitle("GEF4 MVC Tutorial 8 - Layout and connections");
 		
 		primaryStage.show();
 
 		domain.activate();
 
-		List<? extends TextNode> contents = createContents();
+		List<Object> contents = createContents();
 		viewer.getAdapter(ContentModel.class).setContents(contents);
 		
 		TextNodePart p = (TextNodePart) viewer.getContentPartMap().get(model.getRootNode());
@@ -232,7 +232,7 @@ public class Gef4MvcTutorial extends Application {
 			e.printStackTrace();
 		}
 	}
-	protected List<? extends TextNode> createContents() {
+	protected List<Object> createContents() {
 //		if( Files.isReadable(Paths.get("model.xml"))){
 //			try{
 //				Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
@@ -266,7 +266,9 @@ public class Gef4MvcTutorial extends Application {
 
 		model.init();
 		
-		return new LinkedList<TextNode>(model.allNodes);
+		LinkedList<Object> res = new LinkedList<>(model.allNodes);
+		res.addAll(model.getAllRelations());
+		return res;
 	}
 
 	protected Module createGuiceModule() {

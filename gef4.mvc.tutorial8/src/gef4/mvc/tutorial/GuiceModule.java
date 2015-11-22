@@ -2,8 +2,10 @@ package gef4.mvc.tutorial;
 
 import org.eclipse.gef4.common.adapt.AdapterKey;
 import org.eclipse.gef4.common.inject.AdapterMaps;
+import org.eclipse.gef4.fx.anchors.IAnchor;
 import org.eclipse.gef4.geometry.planar.IGeometry;
 import org.eclipse.gef4.mvc.fx.MvcFxModule;
+import org.eclipse.gef4.mvc.fx.parts.ChopBoxAnchorProvider;
 import org.eclipse.gef4.mvc.fx.parts.FXDefaultFeedbackPartFactory;
 import org.eclipse.gef4.mvc.fx.parts.VisualBoundsGeometryProvider;
 import org.eclipse.gef4.mvc.fx.policies.FXFocusAndSelectOnClickPolicy;
@@ -22,6 +24,7 @@ import com.google.inject.multibindings.MapBinder;
 
 import gef4.mvc.tutorial.parts.ContentPartFactory;
 import gef4.mvc.tutorial.parts.TextNodePart;
+import gef4.mvc.tutorial.parts.TextNodeRelationPart;
 import gef4.mvc.tutorial.policies.GlobalOnTypePolicy;
 import javafx.scene.Node;
 
@@ -61,7 +64,13 @@ public final class GuiceModule extends MvcFxModule {
 			.addBinding( AdapterKey.get(FXClickDragTool.DRAG_TOOL_POLICY_KEY))
 			.to(FXTranslateSelectedOnDragPolicy.class);
 		
-		
+		adapterMapBinder
+			.addBinding( AdapterKey.get(new TypeToken<Provider<IAnchor>>() { }))
+			.to(ChopBoxAnchorProvider.class);
+
+	}
+
+	private void bindTextNodePartRelationAdapters(MapBinder<AdapterKey<?>, Object> adapterMapBinder) {
 	}
 
 	@Override
@@ -89,5 +98,9 @@ public final class GuiceModule extends MvcFxModule {
 		bindTextNodePartAdapters(
 			AdapterMaps.getAdapterMapBinder(binder(), TextNodePart.class));
 		
+		bindTextNodePartRelationAdapters(
+				AdapterMaps.getAdapterMapBinder(binder(), TextNodeRelationPart.class));
+		
 	}
+
 }
