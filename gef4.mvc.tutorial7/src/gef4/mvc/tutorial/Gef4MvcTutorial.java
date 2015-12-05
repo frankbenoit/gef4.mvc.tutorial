@@ -18,7 +18,6 @@ import org.eclipse.gef4.fx.nodes.InfiniteCanvas;
 import org.eclipse.gef4.mvc.fx.domain.FXDomain;
 import org.eclipse.gef4.mvc.fx.viewer.FXViewer;
 import org.eclipse.gef4.mvc.models.ContentModel;
-import org.eclipse.gef4.mvc.viewer.IViewer;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -53,7 +52,7 @@ public class Gef4MvcTutorial extends Application {
 		
 		domain = injector.getInstance(FXDomain.class);
 		
-		FXViewer viewer = domain.getAdapter(IViewer.class);
+		FXViewer viewer = domain.getAdapter(FXViewer.class);
 		
 		HBox paneCtrl = new HBox();
 

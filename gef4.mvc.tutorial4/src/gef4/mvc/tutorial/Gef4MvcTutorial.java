@@ -27,7 +27,6 @@ import org.eclipse.gef4.mvc.fx.tools.FXHoverTool;
 import org.eclipse.gef4.mvc.fx.viewer.FXViewer;
 import org.eclipse.gef4.mvc.models.ContentModel;
 import org.eclipse.gef4.mvc.parts.IContentPartFactory;
-import org.eclipse.gef4.mvc.viewer.IViewer;
 
 import com.google.common.reflect.TypeToken;
 import com.google.inject.Guice;
@@ -67,7 +66,7 @@ public class Gef4MvcTutorial extends Application {
 		
 		FXDomain domain = injector.getInstance(FXDomain.class);
 
-		FXViewer viewer = domain.getAdapter(IViewer.class);
+		FXViewer viewer = domain.getAdapter(FXViewer.class);
 		
 		AnchorPane paneCtrl = new AnchorPane();
 		AnchorPane paneDraw = new AnchorPane();
