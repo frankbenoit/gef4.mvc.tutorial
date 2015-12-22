@@ -1,8 +1,8 @@
 # gef4.mvc.tutorial
 
 Depends on GEF4 revision:
-	Revision: a84c6a45364e651ca106cc748bd4f9c4bd11b3f7
-	Date: 27.11.2015 07:12:06
+	Revision: 920b9963a4cc7945c42252d031d0f7690cb79472
+	Date: 21.12.2015 19:42:38
 
 Tutorial 1
 ==========

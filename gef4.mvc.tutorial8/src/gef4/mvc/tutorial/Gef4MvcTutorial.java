@@ -15,7 +15,6 @@ import org.eclipse.gef4.fx.nodes.InfiniteCanvas;
 import org.eclipse.gef4.mvc.fx.domain.FXDomain;
 import org.eclipse.gef4.mvc.fx.viewer.FXViewer;
 import org.eclipse.gef4.mvc.models.ContentModel;
-import org.eclipse.gef4.mvc.viewer.IViewer;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -51,7 +50,7 @@ public class Gef4MvcTutorial extends Application {
 		
 		domain = injector.getInstance(FXDomain.class);
 		
-		FXViewer viewer = domain.getAdapter(IViewer.class);
+		FXViewer viewer = domain.getAdapter(FXViewer.class);
 		
 		HBox paneCtrl = new HBox();
 
@@ -246,13 +245,13 @@ public class Gef4MvcTutorial extends Application {
 		if( model == null ){
 			model = new Model();
 
-			TextNode ch1 = new TextNode( 0, 0, "Node-1");
-			TextNode ch11 = new TextNode( 1, 0, "Node-1-1");
-			TextNode ch12 = new TextNode( 1, 1, "Node-1-2");
-			TextNode ch13 = new TextNode( 2, 0, "Node-1-3");
-			TextNode ch121 = new TextNode( 2, 0, "Node-1-2-1");
-			TextNode ch131 = new TextNode( 2, 0, "Node-1-3-1");
-			TextNode ch132 = new TextNode( 2, 0, "Node-1-3-2");
+			TextNode ch1   = new TextNode( "Node-1");
+			TextNode ch11  = new TextNode( "Node-1-1");
+			TextNode ch12  = new TextNode( "Node-1-2");
+			TextNode ch13  = new TextNode( "Node-1-3");
+			TextNode ch121 = new TextNode( "Node-1-2-1");
+			TextNode ch131 = new TextNode( "Node-1-3-1");
+			TextNode ch132 = new TextNode( "Node-1-3-2");
 			
 			model.setRootNode( ch1 );
 			
@@ -267,7 +266,7 @@ public class Gef4MvcTutorial extends Application {
 		model.init();
 		
 		LinkedList<Object> res = new LinkedList<>(model.allNodes);
-		res.addAll(model.getAllRelations());
+		model.getAllRelations(res);
 		return res;
 	}
 

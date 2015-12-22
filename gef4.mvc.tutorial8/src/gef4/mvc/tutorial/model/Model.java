@@ -16,6 +16,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.eclipse.gef4.common.properties.IPropertyChangeNotifier;
 
+import javafx.util.Pair;
+
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public class Model implements IPropertyChangeNotifier {
@@ -72,13 +74,11 @@ public class Model implements IPropertyChangeNotifier {
 		return rootNode;
 	}
 
-	public Collection<? extends TextNodeRelation> getAllRelations() {
-		LinkedList<TextNodeRelation> res = new LinkedList<>();
+	public void getAllRelations(LinkedList<Object> res) {
 		addRelations( res, rootNode );
-		return res;
 	}
 
-	private void addRelations(LinkedList<TextNodeRelation> res, TextNode n) {
+	private void addRelations(LinkedList<Object> res, TextNode n) {
 		for( TextNode c : n.childs ){
 			TextNodeRelation r = new TextNodeRelation();
 			res.add(r);

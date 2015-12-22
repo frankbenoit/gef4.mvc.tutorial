@@ -24,6 +24,7 @@ public class DeleteOnClickPolicy extends AbstractFXOnClickPolicy {
 
 	@Override
 	public void click(MouseEvent e) {
+		System.out.println("DeleteOnClickPolicy.click()");
 		IVisualPart<Node, ? extends Node> targetPart = getTargetPart();
 		if (targetPart instanceof IContentPart) {
 			DeletionPolicy<Node> policy = getHost().getRoot().getAdapter(DeletionPolicy.class);

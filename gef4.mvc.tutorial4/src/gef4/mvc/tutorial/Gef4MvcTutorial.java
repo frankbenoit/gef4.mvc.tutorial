@@ -17,7 +17,10 @@ import org.eclipse.gef4.geometry.planar.IGeometry;
 import org.eclipse.gef4.mvc.fx.MvcFxModule;
 import org.eclipse.gef4.mvc.fx.domain.FXDomain;
 import org.eclipse.gef4.mvc.fx.parts.FXDefaultFeedbackPartFactory;
-import org.eclipse.gef4.mvc.fx.parts.VisualBoundsGeometryProvider;
+import org.eclipse.gef4.mvc.fx.parts.FXDefaultHandlePartFactory;
+import org.eclipse.gef4.mvc.fx.providers.GeometricBoundsProvider;
+import org.eclipse.gef4.mvc.fx.providers.GeometricOutlineProvider;
+import org.eclipse.gef4.mvc.fx.providers.ShapeOutlineProvider;
 import org.eclipse.gef4.mvc.fx.policies.FXFocusAndSelectOnClickPolicy;
 import org.eclipse.gef4.mvc.fx.policies.FXHoverOnHoverPolicy;
 import org.eclipse.gef4.mvc.fx.policies.FXTransformPolicy;
@@ -146,38 +149,56 @@ public class Gef4MvcTutorial extends Application {
 				// models and do not depend on transaction policies)
 				
 				adapterMapBinder
-						.addBinding(AdapterKey.get(FXClickDragTool.CLICK_TOOL_POLICY_KEY))
+						.addBinding(AdapterKey.defaultRole())
 						.to(FXFocusAndSelectOnClickPolicy.class);
 				
 				adapterMapBinder
-						.addBinding(AdapterKey.get(FXHoverTool.TOOL_POLICY_KEY))
+						.addBinding(AdapterKey.defaultRole())
 						.to(FXHoverOnHoverPolicy.class);
 				
 				// geometry provider for selection feedback
 				adapterMapBinder
-						.addBinding(AdapterKey.get(
-								new TypeToken<Provider<IGeometry>>(){}, 
-								FXDefaultFeedbackPartFactory.SELECTION_FEEDBACK_GEOMETRY_PROVIDER))
-						.to(VisualBoundsGeometryProvider.class);
+						.addBinding(AdapterKey.defaultRole())
+						.to(GeometricBoundsProvider.class);
 				
 				// geometry provider for hover feedback
 				adapterMapBinder
-					.addBinding(AdapterKey.get(
-						new TypeToken<Provider<IGeometry>>(){}, 
-						FXDefaultFeedbackPartFactory.HOVER_FEEDBACK_GEOMETRY_PROVIDER))
-					.to(VisualBoundsGeometryProvider.class);
+					.addBinding(AdapterKey.role("4"))
+					.to(GeometricBoundsProvider.class);
 			}
 			
 			protected void bindTextNodePartAdapters( MapBinder<AdapterKey<?>, Object> adapterMapBinder) {
+				adapterMapBinder
+					.addBinding( AdapterKey.role(
+						FXDefaultFeedbackPartFactory.SELECTION_FEEDBACK_GEOMETRY_PROVIDER))
+					.to(ShapeOutlineProvider.class);
+				
+				// geometry provider for selection handles
+				adapterMapBinder 
+					.addBinding(AdapterKey.role(
+						FXDefaultHandlePartFactory.SELECTION_HANDLES_GEOMETRY_PROVIDER))
+					.to(ShapeOutlineProvider.class);
+				
+				adapterMapBinder
+					.addBinding(AdapterKey.role(
+						FXDefaultFeedbackPartFactory.SELECTION_LINK_FEEDBACK_GEOMETRY_PROVIDER))
+					.to(ShapeOutlineProvider.class);
+				
+				// geometry provider for hover feedback
+				adapterMapBinder
+					.addBinding(AdapterKey.role(
+						FXDefaultFeedbackPartFactory.HOVER_FEEDBACK_GEOMETRY_PROVIDER))
+					.to(ShapeOutlineProvider.class);
+
 				// register resize/transform policies (writing changes also to model)
 				adapterMapBinder
-					.addBinding(AdapterKey.get(FXTransformPolicy.class))
+					.addBinding(AdapterKey.defaultRole())
 					.to(TextNodeTransformPolicy.class);
 					//.to(FXTransformPolicy.class);
 				
 				// interaction policies to relocate on drag (including anchored elements, which are linked)
 				adapterMapBinder
-					.addBinding( AdapterKey.get(FXClickDragTool.DRAG_TOOL_POLICY_KEY))
+					.addBinding(AdapterKey.defaultRole())
 					.to(FXTranslateSelectedOnDragPolicy.class);
 			}
 

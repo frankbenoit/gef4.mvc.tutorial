@@ -42,14 +42,10 @@ public class TextNode implements IPropertyChangeNotifier {
 	private TextNode parent;
 	
 	private Model model;
-	public int x;
-	public int y;
 
 	public TextNode(){
 	}
-	public TextNode( int x, int y, String text){
-		this.x = x;
-		this.y = y;
+	public TextNode( String text){
 		this.text = text;
 	}
 
