@@ -72,7 +72,7 @@ public class Gef4MvcTutorial extends Application {
 
 		domain.activate();
 
-		viewer.getAdapter(ContentModel.class).setContents(createContents());
+		viewer.getAdapter(ContentModel.class).getContents().setAll(createContents());
 	}
 
 	protected List<? extends Object> createContents() {

@@ -118,7 +118,7 @@ public class Gef4MvcTutorial extends Application {
 
 		domain.activate();
 
-		viewer.getAdapter(ContentModel.class).setContents(createContents());
+		viewer.getAdapter(ContentModel.class).getContents().setAll(createContents());
 	}
 
 	private void updateUnReDoButton( Button btn, String label, Function<IUndoContext, IUndoableOperation[]> getHist ){

@@ -31,7 +31,7 @@ public class ModelPart extends AbstractFXContentPart<Group> {
 	}
 
 	@Override
-	public List<? extends TextNode> getContentChildren() {
+	public List<? extends TextNode> doGetContentChildren() {
 		Model model = getContent();
 		return model.getNodes();
 	}
@@ -43,7 +43,7 @@ public class ModelPart extends AbstractFXContentPart<Group> {
 		children.add(visual);
 	}
 	@Override
-	public SetMultimap<? extends Object, String> getContentAnchorages() {
+	public SetMultimap<? extends Object, String> doGetContentAnchorages() {
 		return HashMultimap.create();
 	}
 

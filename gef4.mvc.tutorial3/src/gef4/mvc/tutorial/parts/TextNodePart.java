@@ -115,12 +115,12 @@ public class TextNodePart extends AbstractFXContentPart<Group> implements Proper
 	}
 	
 	@Override
-	public SetMultimap<? extends Object, String> getContentAnchorages() {
+	public SetMultimap<? extends Object, String> doGetContentAnchorages() {
 		return HashMultimap.create();
 	}
 
 	@Override
-	public List<? extends Object> getContentChildren() {
+	public List<? extends Object> doGetContentChildren() {
 		return Collections.emptyList();
 	}
 	
