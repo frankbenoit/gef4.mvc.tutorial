@@ -15,6 +15,8 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
 
 import gef4.mvc.tutorial.model.TextNode;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
@@ -28,16 +30,24 @@ public class TextNodePart extends AbstractFXContentPart<Group> implements Proper
 
 	private Text text;
 	private GeometryNode<RoundedRectangle> fxRoundedRectNode;
-
+	
+	private final ChangeListener<Object> objectObserver = new ChangeListener<Object>() {
+		@Override
+		public void changed(ObservableValue<? extends Object> observable,
+				Object oldValue, Object newValue) {
+			refreshVisual();
+		}
+	};
+	
 	@Override
 	protected void doActivate() {
 		super.doActivate();
-		getContent().addPropertyChangeListener(this);
+		getContent().addPropertyChangeListener(objectObserver);
 	}
 
 	@Override
 	protected void doDeactivate() {
-		getContent().removePropertyChangeListener(this);
+		getContent().removePropertyChangeListener(objectObserver);
 		super.doDeactivate();
 	}
 
