@@ -1,7 +1,6 @@
 package gef4.mvc.tutorial.parts;
 
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.Collections;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import org.eclipse.gef4.geometry.planar.Rectangle;
 import org.eclipse.gef4.geometry.planar.RoundedRectangle;
 import org.eclipse.gef4.mvc.fx.parts.AbstractFXContentPart;
 import org.eclipse.gef4.mvc.fx.policies.FXTransformPolicy;
-import org.eclipse.gef4.mvc.models.FocusModel;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
