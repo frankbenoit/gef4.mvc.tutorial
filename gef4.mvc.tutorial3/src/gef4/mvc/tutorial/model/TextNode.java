@@ -1,23 +1,17 @@
 package gef4.mvc.tutorial.model;
 
 
-import java.beans.PropertyChangeSupport;
-
-
 import org.eclipse.gef4.geometry.planar.Point;
 
-import gef4.mvc.tutorial.parts.TextNodePart;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.paint.Color;
 
 public class TextNode {
-	
-	protected PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-	
-	public final String POSITION_PROPERTY = "position";
-	public final String TEXT_PROPERTY = "text";
+
+	public static final String POSITION_PROPERTY = "position";
+	public static final String TEXT_PROPERTY = "text";
 	
 	public ObjectProperty<Point> position;
 	private ObjectProperty<String> text;
@@ -63,11 +57,9 @@ public class TextNode {
 
 	public void addPropertyChangeListener(ChangeListener<Object> pointObserver) {
 		position.addListener(pointObserver);
-		
 	}
 
 	public void removePropertyChangeListener(ChangeListener<Object> pointObserver) {
 		position.removeListener(pointObserver);
-		
 	}
 }

@@ -11,31 +11,25 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.eclipse.gef4.common.adapt.AdapterKey;
-import org.eclipse.gef4.common.inject.AdapterMaps;
+import org.eclipse.gef4.common.adapt.inject.AdapterMaps;
 import org.eclipse.gef4.fx.nodes.InfiniteCanvas;
-import org.eclipse.gef4.geometry.planar.IGeometry;
 import org.eclipse.gef4.mvc.fx.MvcFxModule;
 import org.eclipse.gef4.mvc.fx.domain.FXDomain;
-import org.eclipse.gef4.mvc.fx.parts.FXDefaultFeedbackPartFactory;
-import org.eclipse.gef4.mvc.fx.parts.FXDefaultHandlePartFactory;
-import org.eclipse.gef4.mvc.fx.providers.GeometricBoundsProvider;
-import org.eclipse.gef4.mvc.fx.providers.GeometricOutlineProvider;
-import org.eclipse.gef4.mvc.fx.providers.ShapeOutlineProvider;
+import org.eclipse.gef4.mvc.fx.parts.FXDefaultHoverFeedbackPartFactory;
+import org.eclipse.gef4.mvc.fx.parts.FXDefaultSelectionFeedbackPartFactory;
+import org.eclipse.gef4.mvc.fx.parts.FXDefaultSelectionHandlePartFactory;
 import org.eclipse.gef4.mvc.fx.policies.FXFocusAndSelectOnClickPolicy;
 import org.eclipse.gef4.mvc.fx.policies.FXHoverOnHoverPolicy;
-import org.eclipse.gef4.mvc.fx.policies.FXTransformPolicy;
 import org.eclipse.gef4.mvc.fx.policies.FXTranslateSelectedOnDragPolicy;
-import org.eclipse.gef4.mvc.fx.tools.FXClickDragTool;
-import org.eclipse.gef4.mvc.fx.tools.FXHoverTool;
+import org.eclipse.gef4.mvc.fx.providers.GeometricBoundsProvider;
+import org.eclipse.gef4.mvc.fx.providers.ShapeOutlineProvider;
 import org.eclipse.gef4.mvc.fx.viewer.FXViewer;
 import org.eclipse.gef4.mvc.models.ContentModel;
 import org.eclipse.gef4.mvc.parts.IContentPartFactory;
 
-import com.google.common.reflect.TypeToken;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.Provider;
 import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.MapBinder;
 
@@ -52,7 +46,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-@SuppressWarnings("serial")
+
 public class Gef4MvcTutorial extends Application {
 
 	private Model model;
@@ -118,6 +112,7 @@ public class Gef4MvcTutorial extends Application {
 			e.printStackTrace();
 		}
 	}
+	
 	protected List<? extends Object> createContents() {
 		if( Files.isReadable(Paths.get("model.xml"))){
 			try{
@@ -133,7 +128,6 @@ public class Gef4MvcTutorial extends Application {
 			model = new Model();
 			model.addNode( new TextNode( 20, 20, "First"));
 			model.addNode( new TextNode( 20, 120, "Second"));
-
 		}
 		
 		return Collections.singletonList(model);
@@ -170,24 +164,24 @@ public class Gef4MvcTutorial extends Application {
 			protected void bindTextNodePartAdapters( MapBinder<AdapterKey<?>, Object> adapterMapBinder) {
 				adapterMapBinder
 					.addBinding( AdapterKey.role(
-						FXDefaultFeedbackPartFactory.SELECTION_FEEDBACK_GEOMETRY_PROVIDER))
+							FXDefaultSelectionFeedbackPartFactory.SELECTION_FEEDBACK_GEOMETRY_PROVIDER))
 					.to(ShapeOutlineProvider.class);
 				
 				// geometry provider for selection handles
 				adapterMapBinder 
 					.addBinding(AdapterKey.role(
-						FXDefaultHandlePartFactory.SELECTION_HANDLES_GEOMETRY_PROVIDER))
+							FXDefaultSelectionHandlePartFactory.SELECTION_HANDLES_GEOMETRY_PROVIDER))
 					.to(ShapeOutlineProvider.class);
 				
 				adapterMapBinder
 					.addBinding(AdapterKey.role(
-						FXDefaultFeedbackPartFactory.SELECTION_LINK_FEEDBACK_GEOMETRY_PROVIDER))
+							FXDefaultSelectionFeedbackPartFactory.SELECTION_LINK_FEEDBACK_GEOMETRY_PROVIDER))
 					.to(ShapeOutlineProvider.class);
 				
 				// geometry provider for hover feedback
 				adapterMapBinder
 					.addBinding(AdapterKey.role(
-						FXDefaultFeedbackPartFactory.HOVER_FEEDBACK_GEOMETRY_PROVIDER))
+							FXDefaultHoverFeedbackPartFactory.HOVER_FEEDBACK_GEOMETRY_PROVIDER))
 					.to(ShapeOutlineProvider.class);
 
 				// register resize/transform policies (writing changes also to model)

@@ -23,7 +23,6 @@ public class ChangeTextNodePositionOperation extends AbstractOperation implement
 		this.part = part;
 	}
 
-
 	@Override
 	public IStatus execute(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		part.setPosition(newPos); 
@@ -44,6 +43,11 @@ public class ChangeTextNodePositionOperation extends AbstractOperation implement
 	@Override
 	public boolean isNoOp() {
 		return false;
+	}
+
+	@Override
+	public boolean isContentRelevant() {
+		return true;
 	}
 
 }

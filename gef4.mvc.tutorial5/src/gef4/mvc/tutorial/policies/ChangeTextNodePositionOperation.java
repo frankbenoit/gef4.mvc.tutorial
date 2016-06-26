@@ -46,4 +46,9 @@ public class ChangeTextNodePositionOperation extends AbstractOperation implement
 		return false;
 	}
 
+	@Override
+	public boolean isContentRelevant() {
+		return true;
+	}
+
 }

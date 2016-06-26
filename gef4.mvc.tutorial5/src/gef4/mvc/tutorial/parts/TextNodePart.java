@@ -17,6 +17,8 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
 
 import gef4.mvc.tutorial.model.TextNode;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -28,7 +30,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Affine;
 
-public class TextNodePart extends AbstractFXContentPart<StackPane> implements PropertyChangeListener {
+public class TextNodePart extends AbstractFXContentPart<StackPane> {
 
 	private Text text;
 	private GeometryNode<RoundedRectangle> fxRoundedRectNode;
@@ -36,24 +38,33 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 	private boolean isEditing = false;
 	private TextField editText;
 
+	private final ChangeListener<Object> objectObserver = new ChangeListener<Object>() {
+		@Override
+		public void changed(ObservableValue<? extends Object> observable,
+				Object oldValue, Object newValue) {
+			
+			refreshVisual();
+		}
+	};
+	
 	@Override
 	protected void doActivate() {
 		super.doActivate();
-		getContent().addPropertyChangeListener(this);
+		getContent().addPropertyChangeListener(objectObserver);
 
-		getViewer()
-			.getAdapter(FocusModel.class)
-			.addPropertyChangeListener( this::handleFocusModelUpdate );
-	
+//		getViewer()
+//			.getAdapter(FocusModel.class)
+//			.addPropertyChangeListener( this::handleFocusModelUpdate );
+//	
 	}
 
 	@Override
 	protected void doDeactivate() {
-		getContent().removePropertyChangeListener(this);
+		getContent().removePropertyChangeListener(objectObserver);
 
-		getViewer()
-			.getAdapter(FocusModel.class)
-			.removePropertyChangeListener( this::handleFocusModelUpdate );
+//		getViewer()
+//			.getAdapter(FocusModel.class)
+//			.removePropertyChangeListener( this::handleFocusModelUpdate );
 		
 		super.doDeactivate();
 	}
@@ -122,7 +133,6 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 			affine.setTx(position.x);
 			affine.setTy(position.y);
 		}
-
 	}
 	
 	private void handleFocusModelUpdate(PropertyChangeEvent evt) {
@@ -141,13 +151,6 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 		new Scene(new Group(msrText));
 		Bounds textBounds = msrText.getLayoutBounds();
 		return textBounds;
-	}
-
-	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
-		if( evt.getSource() == getContent() ){
-			refreshVisual();
-		}
 	}
 
 	public void setPosition(Point newPos) {
@@ -193,12 +196,12 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 	}
 
 	@Override
-	public SetMultimap<? extends Object, String> getContentAnchorages() {
+	public SetMultimap<? extends Object, String> doGetContentAnchorages() {
 		return HashMultimap.create();
 	}
 
 	@Override
-	public List<? extends Object> getContentChildren() {
+	public List<? extends Object> doGetContentChildren() {
 		return Collections.emptyList();
 	}
 
