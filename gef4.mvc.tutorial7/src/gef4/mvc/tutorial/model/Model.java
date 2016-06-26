@@ -8,14 +8,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import org.eclipse.gef4.common.properties.IPropertyChangeNotifier;
-
 @XmlRootElement
-public class Model implements IPropertyChangeNotifier {
+public class Model {
 
-	@XmlTransient
-	protected PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-	
 	@XmlElement
 	LinkedList<TextNode> nodes = new LinkedList<>();
 	
@@ -37,17 +32,17 @@ public class Model implements IPropertyChangeNotifier {
 	public void addNode(TextNode textNode, int atIndex ) {
 		LinkedList<TextNode> oldNodes = new LinkedList<>(nodes);
 		nodes.add( atIndex, textNode );
-		pcs.firePropertyChange("nodes", oldNodes, nodes );
+		//pcs.firePropertyChange("nodes", oldNodes, nodes );
 	}
 	
-	 @Override
-	 public void addPropertyChangeListener(PropertyChangeListener listener) {
-		 pcs.addPropertyChangeListener(listener);
-	 }
-	 @Override
-	 public void removePropertyChangeListener(PropertyChangeListener listener) {
-		 pcs.removePropertyChangeListener(listener);
-	 }
+//	 @Override
+//	 public void addPropertyChangeListener(PropertyChangeListener listener) {
+//		 //pcs.addPropertyChangeListener(listener);
+//	 }
+//	 @Override
+//	 public void removePropertyChangeListener(PropertyChangeListener listener) {
+//		 //pcs.removePropertyChangeListener(listener);
+//	 }
 
 	 
 	

@@ -1,10 +1,11 @@
 package gef4.mvc.tutorial;
 
 import org.eclipse.gef4.common.adapt.AdapterKey;
-import org.eclipse.gef4.common.inject.AdapterMaps;
+import org.eclipse.gef4.common.adapt.inject.AdapterMaps;
 import org.eclipse.gef4.mvc.fx.MvcFxModule;
-import org.eclipse.gef4.mvc.fx.parts.FXDefaultFeedbackPartFactory;
-import org.eclipse.gef4.mvc.fx.parts.FXDefaultHandlePartFactory;
+import org.eclipse.gef4.mvc.fx.parts.FXDefaultHoverFeedbackPartFactory;
+import org.eclipse.gef4.mvc.fx.parts.FXDefaultSelectionFeedbackPartFactory;
+import org.eclipse.gef4.mvc.fx.parts.FXDefaultSelectionHandlePartFactory;
 import org.eclipse.gef4.mvc.fx.policies.FXDeleteSelectedOnTypePolicy;
 import org.eclipse.gef4.mvc.fx.policies.FXFocusAndSelectOnClickPolicy;
 import org.eclipse.gef4.mvc.fx.policies.FXHoverOnHoverPolicy;
@@ -49,24 +50,24 @@ public final class GuiceModule extends MvcFxModule {
 	protected void bindTextNodePartAdapters( MapBinder<AdapterKey<?>, Object> adapterMapBinder) {
 		adapterMapBinder
 			.addBinding( AdapterKey.role(
-				FXDefaultFeedbackPartFactory.SELECTION_FEEDBACK_GEOMETRY_PROVIDER))
+				FXDefaultSelectionFeedbackPartFactory.SELECTION_FEEDBACK_GEOMETRY_PROVIDER))
 			.to(ShapeOutlineProvider.class);
 		
 		// geometry provider for selection handles
 		adapterMapBinder 
 			.addBinding(AdapterKey.role(
-				FXDefaultHandlePartFactory.SELECTION_HANDLES_GEOMETRY_PROVIDER))
+				FXDefaultSelectionHandlePartFactory.SELECTION_HANDLES_GEOMETRY_PROVIDER))
 			.to(ShapeOutlineProvider.class);
 		
 		adapterMapBinder
 			.addBinding(AdapterKey.role(
-				FXDefaultFeedbackPartFactory.SELECTION_LINK_FEEDBACK_GEOMETRY_PROVIDER))
+					FXDefaultSelectionFeedbackPartFactory.SELECTION_LINK_FEEDBACK_GEOMETRY_PROVIDER))
 			.to(ShapeOutlineProvider.class);
 		
 		// geometry provider for hover feedback
 		adapterMapBinder
 			.addBinding(AdapterKey.role(
-				FXDefaultFeedbackPartFactory.HOVER_FEEDBACK_GEOMETRY_PROVIDER))
+				FXDefaultHoverFeedbackPartFactory.HOVER_FEEDBACK_GEOMETRY_PROVIDER))
 			.to(ShapeOutlineProvider.class);
 		
 		// register resize/transform policies (writing changes also to model)
