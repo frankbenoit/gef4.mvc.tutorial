@@ -1,13 +1,15 @@
 package gef4.mvc.tutorial.policies;
 
-import org.eclipse.gef4.mvc.fx.policies.AbstractFXOnTypePolicy;
+import org.eclipse.gef4.mvc.fx.policies.IFXOnTypePolicy;
+import org.eclipse.gef4.mvc.policies.AbstractInteractionPolicy;
 
 import gef4.mvc.tutorial.parts.TextNodePart;
+import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 //only applicable for NodeContentPart (see #getHost())
-public class TextNodeOnTypePolicy extends AbstractFXOnTypePolicy {
+public class TextNodeOnTypePolicy extends AbstractInteractionPolicy<Node>  implements IFXOnTypePolicy {
 
 	@Override
 	public TextNodePart getHost() {
@@ -44,6 +46,12 @@ public class TextNodeOnTypePolicy extends AbstractFXOnTypePolicy {
 
 	@Override
 	public void typed(KeyEvent event) {
+		
+	}
+
+	@Override
+	public void unfocus() {
+		// TODO Auto-generated method stub
 		
 	}
 
