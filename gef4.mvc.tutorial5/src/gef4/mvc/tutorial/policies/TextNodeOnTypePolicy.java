@@ -51,7 +51,6 @@ public class TextNodeOnTypePolicy extends AbstractInteractionPolicy<Node>  imple
 
 	@Override
 	public void unfocus() {
-		// TODO Auto-generated method stub
 		
 	}
 
