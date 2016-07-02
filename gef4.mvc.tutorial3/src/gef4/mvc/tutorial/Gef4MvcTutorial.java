@@ -34,20 +34,20 @@ public class Gef4MvcTutorial extends Application {
 	}
 
 	public void start(final Stage primaryStage) throws Exception {
-		
+
 		Injector injector = Guice.createInjector(createGuiceModule());
-		
+
 		FXDomain domain = injector.getInstance(FXDomain.class);
 
 		FXViewer viewer = domain.getAdapter(FXViewer.class);
-		
+
 		AnchorPane paneCtrl = new AnchorPane();
 		AnchorPane paneDraw = new AnchorPane();
-		VBox vbox = new VBox( paneCtrl, paneDraw );
+		VBox vbox = new VBox(paneCtrl, paneDraw);
 		vbox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-		
+
 		Button btnUpdateModel = new Button("update model");
-		btnUpdateModel.setOnAction( e -> model.doChanges() );
+		btnUpdateModel.setOnAction(e -> model.doChanges());
 		btnUpdateModel.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		paneCtrl.getChildren().add(btnUpdateModel);
 		AnchorPane.setTopAnchor(btnUpdateModel, 10d);
@@ -61,7 +61,7 @@ public class Gef4MvcTutorial extends Application {
 		AnchorPane.setLeftAnchor(drawingPane, 10d);
 		AnchorPane.setRightAnchor(drawingPane, 10d);
 		AnchorPane.setBottomAnchor(drawingPane, 10d);
-		
+
 		primaryStage.setScene(new Scene(vbox));
 
 		primaryStage.setResizable(true);
@@ -72,7 +72,7 @@ public class Gef4MvcTutorial extends Application {
 
 		domain.activate();
 
-		viewer.getAdapter(ContentModel.class).setContents(createContents());
+		viewer.getAdapter(ContentModel.class).getContents().setAll(createContents());
 	}
 
 	protected List<? extends Object> createContents() {
@@ -81,15 +81,14 @@ public class Gef4MvcTutorial extends Application {
 	}
 
 	protected Module createGuiceModule() {
-		return new MvcFxModule(){
+		return new MvcFxModule() {
 			@Override
 			protected void configure() {
 				super.configure();
 
-				binder()
-					.bind(new TypeLiteral<IContentPartFactory<Node>>(){})
-					.toInstance(new ModelPartFactory());
-				
+				binder().bind(new TypeLiteral<IContentPartFactory<Node>>() {
+				}).toInstance(new ModelPartFactory());
+
 			}
 		};
 	}

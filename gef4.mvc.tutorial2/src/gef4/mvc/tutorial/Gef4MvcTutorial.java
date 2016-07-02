@@ -28,9 +28,9 @@ public class Gef4MvcTutorial extends Application {
 	}
 
 	public void start(final Stage primaryStage) throws Exception {
-		
+
 		Injector injector = Guice.createInjector(createGuiceModule());
-		
+
 		FXDomain domain = injector.getInstance(FXDomain.class);
 
 		// hook the (single) viewer into the stage
@@ -48,7 +48,7 @@ public class Gef4MvcTutorial extends Application {
 		domain.activate();
 
 		// set viewer contents
-		viewer.getAdapter(ContentModel.class).setContents(createContents());
+		viewer.getAdapter(ContentModel.class).getContents().setAll(createContents());
 	}
 
 	protected List<? extends Object> createContents() {
@@ -56,15 +56,14 @@ public class Gef4MvcTutorial extends Application {
 	}
 
 	protected Module createGuiceModule() {
-		return new MvcFxModule(){
+		return new MvcFxModule() {
 			@Override
 			protected void configure() {
 				super.configure();
 
-				binder()
-					.bind(new TypeLiteral<IContentPartFactory<Node>>(){})
-					.toInstance(new ModelPartFactory());
-				
+				binder().bind(new TypeLiteral<IContentPartFactory<Node>>() {
+				}).toInstance(new ModelPartFactory());
+
 			}
 		};
 	}

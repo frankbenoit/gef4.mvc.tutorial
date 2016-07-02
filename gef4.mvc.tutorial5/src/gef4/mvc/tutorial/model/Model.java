@@ -10,8 +10,7 @@ public class Model {
 
 	@XmlElement
 	LinkedList<TextNode> nodes = new LinkedList<>();
-	
-	
+
 	public LinkedList<TextNode> getNodes() {
 		return nodes;
 	}
@@ -23,6 +22,6 @@ public class Model {
 	}
 
 	public void addNode(TextNode textNode) {
-		nodes.add( textNode );
+		nodes.add(textNode);
 	}
 }

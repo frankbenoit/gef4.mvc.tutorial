@@ -1,26 +1,25 @@
 package gef4.mvc.tutorial.model;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.util.LinkedList;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
-import org.eclipse.gef4.common.properties.IPropertyChangeNotifier;
+import org.eclipse.gef4.common.beans.property.ReadOnlyListWrapperEx;
+import org.eclipse.gef4.common.collections.CollectionUtils;
+
+import javafx.collections.ListChangeListener;
 
 @XmlRootElement
-public class Model implements IPropertyChangeNotifier {
+public class Model {
 
-	@XmlTransient
-	protected PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-	
+	private static final String TEXT_NODES_PROPERTY = "nodes";
+
 	@XmlElement
-	LinkedList<TextNode> nodes = new LinkedList<>();
-	
-	
-	public LinkedList<TextNode> getNodes() {
+	private final ReadOnlyListWrapperEx<TextNode> nodes = new ReadOnlyListWrapperEx<>(this, TEXT_NODES_PROPERTY,
+			CollectionUtils.<TextNode>observableArrayList());
+
+	public List<TextNode> getNodes() {
 		return nodes;
 	}
 
@@ -32,24 +31,18 @@ public class Model implements IPropertyChangeNotifier {
 
 	public void addNode(TextNode textNode) {
 		int atIndex = nodes.size();
-		addNode( textNode, atIndex );
+		addNode(textNode, atIndex);
 	}
-	public void addNode(TextNode textNode, int atIndex ) {
-		LinkedList<TextNode> oldNodes = new LinkedList<>(nodes);
-		nodes.add( atIndex, textNode );
-		pcs.firePropertyChange("nodes", oldNodes, nodes );
-	}
-	
-	 @Override
-	 public void addPropertyChangeListener(PropertyChangeListener listener) {
-		 pcs.addPropertyChangeListener(listener);
-	 }
-	 @Override
-	 public void removePropertyChangeListener(PropertyChangeListener listener) {
-		 pcs.removePropertyChangeListener(listener);
-	 }
 
-	 
-	
-	
+	public void addNode(TextNode textNode, int atIndex) {
+		nodes.add(atIndex, textNode);
+	}
+
+	public void addPropertyChangeListener(ListChangeListener<Object> listener) {
+		nodes.addListener(listener);
+	}
+
+	public void removePropertyChangeListener(ListChangeListener<Object> listener) {
+		nodes.removeListener(listener);
+	}
 }

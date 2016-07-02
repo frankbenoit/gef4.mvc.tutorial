@@ -18,7 +18,7 @@ public class ModelPart extends AbstractFXContentPart<Group> {
 
 	@Override
 	public Model getContent() {
-		return (Model)super.getContent();
+		return (Model) super.getContent();
 	}
 
 	@Override
@@ -31,11 +31,11 @@ public class ModelPart extends AbstractFXContentPart<Group> {
 	}
 
 	@Override
-	public List<? extends TextNode> getContentChildren() {
+	public List<? extends TextNode> doGetContentChildren() {
 		Model model = getContent();
 		return model.getNodes();
 	}
-	
+
 	@Override
 	protected void addChildVisual(IVisualPart<Node, ? extends Node> child, int index) {
 		ObservableList<Node> children = getVisual().getChildren();
@@ -44,7 +44,7 @@ public class ModelPart extends AbstractFXContentPart<Group> {
 	}
 
 	@Override
-	public SetMultimap<? extends Object, String> getContentAnchorages() {
+	public SetMultimap<? extends Object, String> doGetContentAnchorages() {
 		return HashMultimap.create();
 	}
 

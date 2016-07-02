@@ -12,15 +12,16 @@
  *******************************************************************************/
 package gef4.mvc.tutorial.policies;
 
-import org.eclipse.gef4.mvc.fx.policies.AbstractFXOnClickPolicy;
+import org.eclipse.gef4.mvc.fx.policies.IFXOnClickPolicy;
 import org.eclipse.gef4.mvc.parts.IContentPart;
 import org.eclipse.gef4.mvc.parts.IVisualPart;
+import org.eclipse.gef4.mvc.policies.AbstractInteractionPolicy;
 import org.eclipse.gef4.mvc.policies.DeletionPolicy;
 
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 
-public class DeleteOnClickPolicy extends AbstractFXOnClickPolicy {
+public class DeleteOnClickPolicy extends AbstractInteractionPolicy<Node> implements IFXOnClickPolicy {
 
 	@Override
 	public void click(MouseEvent e) {
@@ -44,7 +45,7 @@ public class DeleteOnClickPolicy extends AbstractFXOnClickPolicy {
 	 * @return The target {@link IVisualPart} for this policy.
 	 */
 	protected IVisualPart<Node, ? extends Node> getTargetPart() {
-		return getHost().getAnchorages().keySet().iterator().next();
+		return getHost().getAnchoragesUnmodifiable().keySet().iterator().next();
 	}
 
 }
