@@ -46,4 +46,9 @@ public class ChangeTextNodeTextOperation extends AbstractOperation implements IT
 		return oldText.equals(newText);
 	}
 
+	@Override
+	public boolean isContentRelevant() {
+		return true;
+	}
+
 }

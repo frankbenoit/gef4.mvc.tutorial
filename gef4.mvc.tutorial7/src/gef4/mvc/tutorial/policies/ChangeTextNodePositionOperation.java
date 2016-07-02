@@ -46,4 +46,10 @@ public class ChangeTextNodePositionOperation extends AbstractOperation implement
 		return newPos.equals(oldPos);
 	}
 
+
+	@Override
+	public boolean isContentRelevant() {
+		return true;
+	}
+
 }

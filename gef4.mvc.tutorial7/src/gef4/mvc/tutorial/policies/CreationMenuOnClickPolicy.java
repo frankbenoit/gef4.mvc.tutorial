@@ -11,11 +11,13 @@
  *******************************************************************************/
 package gef4.mvc.tutorial.policies;
 
+import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.gef4.fx.nodes.InfiniteCanvas;
-import org.eclipse.gef4.mvc.fx.policies.AbstractFXOnClickPolicy;
+import org.eclipse.gef4.mvc.fx.policies.IFXOnClickPolicy;
 import org.eclipse.gef4.mvc.fx.viewer.FXViewer;
 import org.eclipse.gef4.mvc.parts.IContentPart;
 import org.eclipse.gef4.mvc.parts.IRootPart;
+import org.eclipse.gef4.mvc.policies.AbstractInteractionPolicy;
 import org.eclipse.gef4.mvc.policies.CreationPolicy;
 import org.eclipse.gef4.mvc.viewer.IViewer;
 
@@ -36,7 +38,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Popup;
 
 // TODO: only applicable for FXRootPart and FXViewer
-public class CreationMenuOnClickPolicy extends AbstractFXOnClickPolicy {
+public class CreationMenuOnClickPolicy extends AbstractInteractionPolicy<Node> implements IFXOnClickPolicy  {
 
 	/**
 	 * The adapter role for the
@@ -114,7 +116,12 @@ public class CreationMenuOnClickPolicy extends AbstractFXOnClickPolicy {
 				HashMultimap.create());
 
 		// execute on stack
-		viewer.getDomain().execute(creationPolicy.commit());
+		try {
+			viewer.getDomain().execute(creationPolicy.commit());
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		popup.hide();
 	}

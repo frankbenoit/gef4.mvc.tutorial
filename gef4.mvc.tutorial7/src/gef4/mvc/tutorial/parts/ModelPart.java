@@ -19,16 +19,18 @@ import javafx.scene.Node;
 public class ModelPart extends AbstractFXContentPart<Group> implements PropertyChangeListener {
 
 	
+	
+	
 	@Override
 	protected void doActivate() {
 		super.doActivate();
-		getContent().addPropertyChangeListener(this);
+		//getContent().addPropertyChangeListener(this);
 
 	}
 
 	@Override
 	protected void doDeactivate() {
-		getContent().removePropertyChangeListener(this);
+		//getContent().removePropertyChangeListener(this);
 
 		super.doDeactivate();
 	}
