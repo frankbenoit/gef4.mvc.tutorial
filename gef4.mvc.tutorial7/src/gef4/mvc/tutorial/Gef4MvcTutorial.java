@@ -44,56 +44,55 @@ public class Gef4MvcTutorial extends Application {
 	}
 
 	public void start(final Stage primaryStage) throws Exception {
-		
-		
+
 		jaxbContext = JAXBContext.newInstance(Model.class, TextNode.class);
-		
+
 		Injector injector = Guice.createInjector(createGuiceModule());
-		
+
 		domain = injector.getInstance(FXDomain.class);
-		
+
 		FXViewer viewer = domain.getAdapter(FXViewer.class);
-		
+
 		HBox paneCtrl = new HBox();
 
 		AnchorPane paneDraw = new AnchorPane();
-		VBox vbox = new VBox( paneCtrl, paneDraw );
-		//vbox.setPrefWidth(Double.MAX_VALUE);
+		VBox vbox = new VBox(paneCtrl, paneDraw);
+		// vbox.setPrefWidth(Double.MAX_VALUE);
 		vbox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
 		Button btnUpdateModel = new Button("Random Changes");
-		btnUpdateModel.setOnAction( e -> model.doChanges() );
+		btnUpdateModel.setOnAction(e -> model.doChanges());
 		btnUpdateModel.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
 		Button btnUndo = new Button("Undo");
 		btnUndo.setMaxWidth(Double.MAX_VALUE);
-		btnUndo.setDisable( true );
-		btnUndo.setOnAction( e -> {
+		btnUndo.setDisable(true);
+		btnUndo.setOnAction(e -> {
 			try {
 				IOperationHistory history = domain.getOperationHistory();
-				history.undo( domain.getUndoContext(), null, null );
+				history.undo(domain.getUndoContext(), null, null);
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		});
-		
+
 		Button btnRedo = new Button("Redo");
 		btnRedo.setMaxWidth(Double.MAX_VALUE);
-		btnRedo.setDisable( true );
-		btnRedo.setOnAction( e -> {
+		btnRedo.setDisable(true);
+		btnRedo.setOnAction(e -> {
 			try {
 				IOperationHistory history = domain.getOperationHistory();
-				history.redo( domain.getUndoContext(), null, null );
+				history.redo(domain.getUndoContext(), null, null);
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		});
-		
-		domain.getOperationHistory().addOperationHistoryListener( e -> {
-			updateUnReDoButton(btnUndo, "Undo", e.getHistory()::getUndoHistory );
-			updateUnReDoButton(btnRedo, "Redo", e.getHistory()::getRedoHistory );
+
+		domain.getOperationHistory().addOperationHistoryListener(e -> {
+			updateUnReDoButton(btnUndo, "Undo", e.getHistory()::getUndoHistory);
+			updateUnReDoButton(btnRedo, "Redo", e.getHistory()::getRedoHistory);
 		});
-		
+
 		paneCtrl.getChildren().addAll(btnUpdateModel, btnUndo, btnRedo);
 
 		InfiniteCanvas drawingPane = viewer.getCanvas();
@@ -104,14 +103,14 @@ public class Gef4MvcTutorial extends Application {
 		AnchorPane.setLeftAnchor(drawingPane, 10d);
 		AnchorPane.setRightAnchor(drawingPane, 10d);
 		AnchorPane.setBottomAnchor(drawingPane, 10d);
-		
+
 		primaryStage.setScene(new Scene(vbox));
 
 		primaryStage.setResizable(true);
 		primaryStage.setWidth(640);
 		primaryStage.setHeight(480);
 		primaryStage.setTitle("GEF4 MVC Tutorial 7 - Remove Node");
-		
+
 		primaryStage.show();
 
 		domain.activate();
@@ -119,48 +118,46 @@ public class Gef4MvcTutorial extends Application {
 		viewer.getAdapter(ContentModel.class).getContents().setAll(createContents());
 	}
 
-	private void updateUnReDoButton( Button btn, String label, Function<IUndoContext, IUndoableOperation[]> getHist ){
+	private void updateUnReDoButton(Button btn, String label, Function<IUndoContext, IUndoableOperation[]> getHist) {
 		IUndoableOperation[] entries = getHist.apply(domain.getUndoContext());
-		btn.setDisable( entries.length == 0 );
-		if( entries.length == 0 ){
-			btn.setText( label );
-		}
-		else {
-			IUndoableOperation currentEntry = entries[entries.length-1];
-			btn.setText( String.format("%s: %s", label, currentEntry.getLabel()));
+		btn.setDisable(entries.length == 0);
+		if (entries.length == 0) {
+			btn.setText(label);
+		} else {
+			IUndoableOperation currentEntry = entries[entries.length - 1];
+			btn.setText(String.format("%s: %s", label, currentEntry.getLabel()));
 		}
 	}
-	
+
 	@Override
 	public void stop() throws Exception {
 		super.stop();
-		try{
+		try {
 			Marshaller marshaller = jaxbContext.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-			marshaller.marshal( model, new File("model.xml"));
-		}
-		catch( Exception e){
+			marshaller.marshal(model, new File("model.xml"));
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 	protected List<? extends Object> createContents() {
-		if( Files.isReadable(Paths.get("model.xml"))){
-			try{
+		if (Files.isReadable(Paths.get("model.xml"))) {
+			try {
 				Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 				model = (Model) jaxbUnmarshaller.unmarshal(new File("model.xml"));
-			}
-			catch( Exception e){
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 
-		if( model == null ){
+		if (model == null) {
 			model = new Model();
-			model.addNode( new TextNode( 20, 20, "First"));
-			model.addNode( new TextNode( 20, 120, "Second"));
+			model.addNode(new TextNode(20, 20, "First"));
+			model.addNode(new TextNode(20, 120, "Second"));
 
 		}
-		
+
 		return Collections.singletonList(model);
 	}
 

@@ -18,26 +18,23 @@ import javafx.scene.Node;
 
 public class ModelPart extends AbstractFXContentPart<Group> implements PropertyChangeListener {
 
-	
-	
-	
 	@Override
 	protected void doActivate() {
 		super.doActivate();
-		//getContent().addPropertyChangeListener(this);
+		// getContent().addPropertyChangeListener(this);
 
 	}
 
 	@Override
 	protected void doDeactivate() {
-		//getContent().removePropertyChangeListener(this);
+		// getContent().removePropertyChangeListener(this);
 
 		super.doDeactivate();
 	}
-	
+
 	@Override
 	public Model getContent() {
-		return (Model)super.getContent();
+		return (Model) super.getContent();
 	}
 
 	@Override
@@ -54,24 +51,24 @@ public class ModelPart extends AbstractFXContentPart<Group> implements PropertyC
 		Model model = getContent();
 		return model.getNodes();
 	}
-	
+
 	@Override
 	protected void addChildVisual(IVisualPart<Node, ? extends Node> child, int index) {
 		ObservableList<Node> children = getVisual().getChildren();
 		Node visual = child.getVisual();
 		children.add(visual);
 	}
-	
+
 	@Override
 	protected void doAddContentChild(Object contentChild, int index) {
-		getContent().addNode( (TextNode) contentChild, index );
+		getContent().addNode((TextNode) contentChild, index);
 	}
-	
+
 	@Override
 	public void doRemoveContentChild(Object contentChild) {
 		getContent().getNodes().remove(contentChild);
 	}
-	
+
 	@Override
 	protected void removeChildVisual(IVisualPart<Node, ? extends Node> child, int index) {
 		ObservableList<Node> children = getVisual().getChildren();
@@ -82,12 +79,12 @@ public class ModelPart extends AbstractFXContentPart<Group> implements PropertyC
 	public SetMultimap<? extends Object, String> doGetContentAnchorages() {
 		return HashMultimap.create();
 	}
-	
+
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		if( evt.getSource() == getContent() ){
+		if (evt.getSource() == getContent()) {
 			refreshVisual();
 		}
 	}
-	
+
 }

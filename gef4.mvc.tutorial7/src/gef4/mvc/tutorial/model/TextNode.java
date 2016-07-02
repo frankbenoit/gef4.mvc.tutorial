@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 
 @XmlRootElement
 public class TextNode {
-	
+
 	@XmlTransient
 	public static final String POSITION_PROPERTY = "position";
 	@XmlTransient

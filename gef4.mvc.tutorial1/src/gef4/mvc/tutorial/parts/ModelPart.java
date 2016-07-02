@@ -17,7 +17,7 @@ public class ModelPart extends AbstractFXContentPart<GeometryNode<RoundedRectang
 
 	@Override
 	public Model getContent() {
-		return (Model)super.getContent();
+		return (Model) super.getContent();
 	}
 
 	@Override
@@ -28,9 +28,9 @@ public class ModelPart extends AbstractFXContentPart<GeometryNode<RoundedRectang
 	@Override
 	protected void doRefreshVisual(GeometryNode<RoundedRectangle> visual) {
 		Model model = getContent();
-		visual.setGeometry(new RoundedRectangle(model.getRect(), 10, 10 ));
-		visual.setFill( model.getColor() );
-		visual.setStroke( Color.BLACK );
+		visual.setGeometry(new RoundedRectangle(model.getRect(), 10, 10));
+		visual.setFill(model.getColor());
+		visual.setStroke(Color.BLACK);
 		visual.setStrokeWidth(2);
 	}
 
@@ -44,5 +44,4 @@ public class ModelPart extends AbstractFXContentPart<GeometryNode<RoundedRectang
 		return Collections.emptyList();
 	}
 
-	
 }

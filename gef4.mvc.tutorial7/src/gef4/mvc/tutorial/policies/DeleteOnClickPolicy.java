@@ -21,7 +21,7 @@ import org.eclipse.gef4.mvc.policies.DeletionPolicy;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 
-public class DeleteOnClickPolicy extends AbstractInteractionPolicy<Node> implements IFXOnClickPolicy  {
+public class DeleteOnClickPolicy extends AbstractInteractionPolicy<Node> implements IFXOnClickPolicy {
 
 	@Override
 	public void click(MouseEvent e) {

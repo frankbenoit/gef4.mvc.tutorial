@@ -7,14 +7,14 @@ import javafx.scene.paint.Color;
 public class Model {
 
 	public final Point position = new Point();
-	
+
 	private String text = "Text ...";
 	private Color color = Color.LIGHTSKYBLUE;
-	
-	public Model(){
+
+	public Model() {
 		position.setLocation(50, 50);
 	}
-	
+
 	public String getText() {
 		return text;
 	}
@@ -22,7 +22,7 @@ public class Model {
 	public Point getPosition() {
 		return position;
 	}
-	
+
 	public Color getColor() {
 		return color;
 	}

@@ -7,25 +7,24 @@ import javafx.scene.paint.Color;
 public class Model {
 
 	public final Rectangle rect = new Rectangle();
-	
-//	private String text = "Text";
+
+	// private String text = "Text";
 	private Color color = Color.LIGHTSKYBLUE;
-	
-	public Model(){
+
+	public Model() {
 		rect.setBounds(20, 20, 150, 80);
 	}
-	
-//	public String getText() {
-//		return text;
-//	}
-	
+
+	// public String getText() {
+	// return text;
+	// }
+
 	public Rectangle getRect() {
 		return rect;
 	}
-	
+
 	public Color getColor() {
 		return color;
 	}
-	
-	
+
 }

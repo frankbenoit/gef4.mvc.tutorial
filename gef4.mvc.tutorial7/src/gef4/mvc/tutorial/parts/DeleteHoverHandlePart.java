@@ -24,19 +24,15 @@ public class DeleteHoverHandlePart extends AbstractLogoHoverHandlePart<HoverOver
 
 	@Override
 	protected HoverOverlayImageView createVisual() {
-		URL overlayImageResource = DeleteHoverHandlePart.class
-				.getResource(IMG_DELETE);
+		URL overlayImageResource = DeleteHoverHandlePart.class.getResource(IMG_DELETE);
 		if (overlayImageResource == null) {
-			throw new IllegalStateException(
-					"Cannot find resource <" + IMG_DELETE + ">.");
+			throw new IllegalStateException("Cannot find resource <" + IMG_DELETE + ">.");
 		}
 		Image overlayImage = new Image(overlayImageResource.toExternalForm());
 
-		URL baseImageResource = DeleteHoverHandlePart.class
-				.getResource(IMG_DELETE_DISABLED);
+		URL baseImageResource = DeleteHoverHandlePart.class.getResource(IMG_DELETE_DISABLED);
 		if (baseImageResource == null) {
-			throw new IllegalStateException(
-					"Cannot find resource <" + IMG_DELETE_DISABLED + ">.");
+			throw new IllegalStateException("Cannot find resource <" + IMG_DELETE_DISABLED + ">.");
 		}
 		Image baseImage = new Image(baseImageResource.toExternalForm());
 

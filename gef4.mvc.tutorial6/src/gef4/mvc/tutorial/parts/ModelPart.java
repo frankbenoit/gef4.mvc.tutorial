@@ -18,7 +18,7 @@ public class ModelPart extends AbstractFXContentPart<Group> {
 
 	@Override
 	public Model getContent() {
-		return (Model)super.getContent();
+		return (Model) super.getContent();
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class ModelPart extends AbstractFXContentPart<Group> {
 		Model model = getContent();
 		return model.getNodes();
 	}
-	
+
 	@Override
 	protected void addChildVisual(IVisualPart<Node, ? extends Node> child, int index) {
 		ObservableList<Node> children = getVisual().getChildren();

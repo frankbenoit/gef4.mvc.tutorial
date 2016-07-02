@@ -73,8 +73,8 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> {
 		super.doActivate();
 		getContent().addPropertyChangeListener(objectObserver);
 
-		FocusModel<Node> focusModel = getRoot().getViewer().getAdapter(
-				new TypeToken<FocusModel<Node>>() {});
+		FocusModel<Node> focusModel = getRoot().getViewer().getAdapter(new TypeToken<FocusModel<Node>>() {
+		});
 
 		focusModel.focusProperty().addListener(focusObserver);
 	}
@@ -84,8 +84,8 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> {
 	protected void doDeactivate() {
 		getContent().removePropertyChangeListener(objectObserver);
 
-		FocusModel<Node> focusModel = getRoot().getViewer().getAdapter(
-				new TypeToken<FocusModel<Node>>() {});
+		FocusModel<Node> focusModel = getRoot().getViewer().getAdapter(new TypeToken<FocusModel<Node>>() {
+		});
 		focusModel.focusProperty().removeListener(focusObserver);
 
 		super.doDeactivate();

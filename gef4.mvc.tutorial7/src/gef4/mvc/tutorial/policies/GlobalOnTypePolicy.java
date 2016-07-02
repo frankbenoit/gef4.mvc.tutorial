@@ -11,10 +11,10 @@ import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 
-public class GlobalOnTypePolicy extends AbstractInteractionPolicy<Node>  implements IFXOnTypePolicy  {
+public class GlobalOnTypePolicy extends AbstractInteractionPolicy<Node> implements IFXOnTypePolicy {
 
-	private static final KeyCodeCombination ctrlY = new KeyCodeCombination( KeyCode.Y, KeyCombination.CONTROL_DOWN );
-	private static final KeyCodeCombination ctrlZ = new KeyCodeCombination( KeyCode.Z, KeyCombination.CONTROL_DOWN );
+	private static final KeyCodeCombination ctrlY = new KeyCodeCombination(KeyCode.Y, KeyCombination.CONTROL_DOWN);
+	private static final KeyCodeCombination ctrlZ = new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN);
 
 	@Override
 	public void pressed(KeyEvent event) {
@@ -44,12 +44,12 @@ public class GlobalOnTypePolicy extends AbstractInteractionPolicy<Node>  impleme
 
 	@Override
 	public void typed(KeyEvent event) {
-		
+
 	}
 
 	@Override
 	public void unfocus() {
-		
+
 	}
 
 }

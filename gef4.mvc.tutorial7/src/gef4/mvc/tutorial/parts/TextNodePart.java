@@ -70,10 +70,10 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 
 			}
 		}
-	}	
+	}
 
 	private ChangeListener<IContentPart<Node, ? extends Node>> focusObserver = new FocusListener(this);
-	
+
 	@SuppressWarnings("serial")
 	@Override
 	protected void doActivate() {
@@ -92,16 +92,16 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 	protected void doDeactivate() {
 		getContent().removePropertyChangeListener(objectObserver);
 
-		FocusModel<Node> focusModel = getRoot().getViewer().getAdapter(new TypeToken<FocusModel<Node>>() {});
+		FocusModel<Node> focusModel = getRoot().getViewer().getAdapter(new TypeToken<FocusModel<Node>>() {
+		});
 		focusModel.focusProperty().removeListener(focusObserver);
 
 		super.doDeactivate();
 	}
 
-	
 	@Override
 	public TextNode getContent() {
-		return (TextNode)super.getContent();
+		return (TextNode) super.getContent();
 	}
 
 	@Override
@@ -110,52 +110,49 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 		text = new Text();
 		fxRoundedRectNode = new GeometryNode<>();
 		editText = new TextField();
-		
+
 		editText.setManaged(false);
 		editText.setVisible(false);
-		
+
 		group.getChildren().add(fxRoundedRectNode);
 		group.getChildren().add(text);
 		group.getChildren().add(editText);
-		
-		
+
 		return group;
 	}
 
 	@Override
 	protected void doRefreshVisual(StackPane visual) {
 		TextNode model = getContent();
-		
-		Font font = Font.font("Monospace", FontWeight.BOLD, 50 );
+
+		Font font = Font.font("Monospace", FontWeight.BOLD, 50);
 		Color textColor = Color.BLACK;
 		int textStrokeWidth = 2;
-		
-		
-		text.setText( model.getText() );
-		text.setFont( font );
+
+		text.setText(model.getText());
+		text.setFont(font);
 		text.setFill(textColor);
 		text.setStrokeWidth(textStrokeWidth);
 
 		// measure size
-		Bounds textBounds = msrText(model.getText(), font, textStrokeWidth );
+		Bounds textBounds = msrText(model.getText(), font, textStrokeWidth);
 
-		Rectangle bounds = new Rectangle( 
-				0, 0, 
-				textBounds.getWidth() + textBounds.getHeight(), textBounds.getHeight() * 1.5 );
+		Rectangle bounds = new Rectangle(0, 0, textBounds.getWidth() + textBounds.getHeight(),
+				textBounds.getHeight() * 1.5);
 
 		// the rounded rectangle
-		RoundedRectangle roundRect = new RoundedRectangle( bounds, 10, 10 );
+		RoundedRectangle roundRect = new RoundedRectangle(bounds, 10, 10);
 		fxRoundedRectNode.setGeometry(roundRect);
-		fxRoundedRectNode.setFill( model.getColor() );
-		fxRoundedRectNode.setStroke( Color.BLACK );
+		fxRoundedRectNode.setFill(model.getColor());
+		fxRoundedRectNode.setStroke(Color.BLACK);
 		fxRoundedRectNode.setStrokeWidth(2);
 		fxRoundedRectNode.toBack();
 
 		text.toFront();
-		
+
 		editText.toFront();
 		editText.setPrefWidth(bounds.getWidth());
-			
+
 		{
 			Point position = model.getPosition();
 			Affine affine = getAdapter(FXTransformPolicy.TRANSFORM_PROVIDER_KEY).get();
@@ -164,18 +161,17 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 		}
 
 	}
-	
+
 	private void handleFocusModelUpdate(PropertyChangeEvent evt) {
 		// when focus goes away, cancel editing
-		if( evt.getNewValue() != this  ){
+		if (evt.getNewValue() != this) {
 			editModeEnd(false);
 		}
 	}
-	
 
 	private Bounds msrText(String string, Font font, int textStrokeWidth) {
 		Text msrText = new Text(string);
-		msrText.setFont( font );
+		msrText.setFont(font);
 		msrText.setStrokeWidth(textStrokeWidth);
 
 		new Scene(new Group(msrText));
@@ -185,34 +181,33 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		if( evt.getSource() == getContent() ){
+		if (evt.getSource() == getContent()) {
 			refreshVisual();
 		}
 	}
 
 	public void setPosition(Point newPos) {
-		getContent().setPosition( newPos );
+		getContent().setPosition(newPos);
 	}
-	
+
 	public void editModeStart() {
 		if (isEditing) {
 			return;
 		}
-			
-		
+
 		isEditing = true;
 		setVisualsForEditing();
-		
+
 		editText.setText(text.getText());
 		editText.requestFocus();
 		refreshVisual();
 	}
-	
-	public void editModeEnd( boolean commit ) {
+
+	public void editModeEnd(boolean commit) {
 		if (!isEditing) {
 			return;
 		}
-		if( commit ){
+		if (commit) {
 			String newText = editText.getText();
 			text.setText(newText);
 			try {
@@ -228,13 +223,14 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 		setVisualsForEditing();
 	}
 
-	private void setVisualsForEditing(){
+	private void setVisualsForEditing() {
 		editText.setManaged(isEditing);
 		editText.setVisible(isEditing);
 		text.setManaged(!isEditing);
 		text.setVisible(!isEditing);
-		
+
 	}
+
 	public boolean isEditing() {
 		return isEditing;
 	}

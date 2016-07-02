@@ -91,7 +91,8 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 	protected void doDeactivate() {
 		getContent().removePropertyChangeListener(objectObserver);
 
-		FocusModel<Node> focusModel = getRoot().getViewer().getAdapter(new TypeToken<FocusModel<Node>>() {});
+		FocusModel<Node> focusModel = getRoot().getViewer().getAdapter(new TypeToken<FocusModel<Node>>() {
+		});
 		focusModel.focusProperty().removeListener(focusObserver);
 
 		super.doDeactivate();
@@ -159,7 +160,6 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 		}
 
 	}
-
 
 	private Bounds msrText(String string, Font font, int textStrokeWidth) {
 		Text msrText = new Text(string);

@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
 import org.eclipse.gef4.mvc.behaviors.IBehavior;
 import org.eclipse.gef4.mvc.fx.parts.FXDefaultHoverHandlePartFactory;
 import org.eclipse.gef4.mvc.parts.IHandlePart;
@@ -33,12 +32,11 @@ public class HandlePartFactory extends FXDefaultHoverHandlePartFactory {
 
 	@Override
 	public List<IHandlePart<Node, ? extends Node>> createHandleParts(
-			List<? extends IVisualPart<Node, ? extends Node>> targets,
-			IBehavior<Node> contextBehavior,
+			List<? extends IVisualPart<Node, ? extends Node>> targets, IBehavior<Node> contextBehavior,
 			Map<Object, Object> contextMap) {
-		
+
 		List<IHandlePart<Node, ? extends Node>> handles = new ArrayList<IHandlePart<Node, ? extends Node>>();
-		
+
 		final IVisualPart<Node, ? extends Node> target = targets.get(0);
 		if (target instanceof TextNodePart) {
 			// create root handle part
