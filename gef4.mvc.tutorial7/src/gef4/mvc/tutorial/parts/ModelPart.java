@@ -21,12 +21,14 @@ public class ModelPart extends AbstractFXContentPart<Group> implements PropertyC
 	@Override
 	protected void doActivate() {
 		super.doActivate();
+		// TODO: fix this
 		// getContent().addPropertyChangeListener(this);
 
 	}
 
 	@Override
 	protected void doDeactivate() {
+		// TODO: fix this
 		// getContent().removePropertyChangeListener(this);
 
 		super.doDeactivate();
