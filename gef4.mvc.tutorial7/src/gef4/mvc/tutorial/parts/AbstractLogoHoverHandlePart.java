@@ -11,11 +11,9 @@
  *******************************************************************************/
 package gef4.mvc.tutorial.parts;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
 import javafx.scene.Node;
 
+import org.eclipse.gef4.common.collections.SetMultimapChangeListener;
 import org.eclipse.gef4.mvc.fx.parts.AbstractFXHandlePart;
 import org.eclipse.gef4.mvc.parts.IVisualPart;
 import org.eclipse.gef4.mvc.viewer.IViewer;
@@ -25,17 +23,31 @@ import com.google.common.collect.SetMultimap;
 public abstract class AbstractLogoHoverHandlePart<T extends Node> extends AbstractFXHandlePart<T> {
 
 	private boolean registered = false;
-	private final PropertyChangeListener parentAnchoragesChangeListener = new PropertyChangeListener() {
-		@SuppressWarnings("unchecked")
+	
+//	private final PropertyChangeListener parentAnchoragesChangeListener = new PropertyChangeListener() {
+//		@SuppressWarnings("unchecked")
+//		@Override
+//		public void propertyChange(PropertyChangeEvent evt) {
+//			if (IVisualPart.ANCHORAGES_PROPERTY.equals(evt.getPropertyName())) {
+//				onParentAnchoragesChanged(
+//						(SetMultimap<IVisualPart<Node, ? extends Node>, String>) evt.getOldValue(),
+//						(SetMultimap<IVisualPart<Node, ? extends Node>, String>) evt.getNewValue());
+//			}
+//		}
+//	};
+	
+	private final SetMultimapChangeListener<IVisualPart<Node, ? extends Node>, String> parentAnchoragesChangeListener = new SetMultimapChangeListener<IVisualPart<Node, ? extends Node>, String>() {
+
 		@Override
-		public void propertyChange(PropertyChangeEvent evt) {
-			if (IVisualPart.ANCHORAGES_PROPERTY.equals(evt.getPropertyName())) {
-				onParentAnchoragesChanged(
-						(SetMultimap<IVisualPart<Node, ? extends Node>, String>) evt.getOldValue(),
-						(SetMultimap<IVisualPart<Node, ? extends Node>, String>) evt.getNewValue());
+		public void onChanged(
+				org.eclipse.gef4.common.collections.SetMultimapChangeListener.Change<? extends IVisualPart<Node, ? extends Node>, ? extends String> change) {
+			
+			if (!registered && getViewer() != null) {
+				register(getViewer());
 			}
 		}
-	};
+	};	
+	
 
 	@Override
 	protected void doRefreshVisual(T visual) {
@@ -62,10 +74,10 @@ public abstract class AbstractLogoHoverHandlePart<T extends Node> extends Abstra
 	@Override
 	public void setParent(IVisualPart<Node, ? extends Node> newParent) {
 		if (getParent() != null) {
-			getParent().removePropertyChangeListener(parentAnchoragesChangeListener);
+			getParent().getAnchoragesUnmodifiable().removeListener(parentAnchoragesChangeListener);
 		}
 		if (newParent != null) {
-			newParent.addPropertyChangeListener(parentAnchoragesChangeListener);
+			newParent.getAnchoragesUnmodifiable().addListener(parentAnchoragesChangeListener);
 		}
 		super.setParent(newParent);
 	}

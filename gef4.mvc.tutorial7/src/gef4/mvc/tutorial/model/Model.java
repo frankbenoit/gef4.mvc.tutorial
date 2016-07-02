@@ -35,16 +35,12 @@ public class Model {
 		//pcs.firePropertyChange("nodes", oldNodes, nodes );
 	}
 	
-//	 @Override
-//	 public void addPropertyChangeListener(PropertyChangeListener listener) {
-//		 //pcs.addPropertyChangeListener(listener);
-//	 }
-//	 @Override
-//	 public void removePropertyChangeListener(PropertyChangeListener listener) {
-//		 //pcs.removePropertyChangeListener(listener);
-//	 }
-
-	 
-	
-	
+	 @Override
+	 public void addPropertyChangeListener(PropertyChangeListener listener) {
+		 //pcs.addPropertyChangeListener(listener);
+	 }
+	 @Override
+	 public void removePropertyChangeListener(PropertyChangeListener listener) {
+		 //pcs.removePropertyChangeListener(listener);
+	 }
 }

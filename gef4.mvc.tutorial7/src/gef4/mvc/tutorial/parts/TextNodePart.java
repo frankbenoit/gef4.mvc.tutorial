@@ -14,12 +14,16 @@ import org.eclipse.gef4.mvc.domain.IDomain;
 import org.eclipse.gef4.mvc.fx.parts.AbstractFXContentPart;
 import org.eclipse.gef4.mvc.fx.policies.FXTransformPolicy;
 import org.eclipse.gef4.mvc.models.FocusModel;
+import org.eclipse.gef4.mvc.parts.IContentPart;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
+import com.google.common.reflect.TypeToken;
 
 import gef4.mvc.tutorial.model.TextNode;
 import gef4.mvc.tutorial.policies.ChangeTextNodeTextOperation;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -40,25 +44,57 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 	private boolean isEditing = false;
 	private TextField editText;
 
+	private final ChangeListener<Object> objectObserver = new ChangeListener<Object>() {
+		@Override
+		public void changed(ObservableValue<? extends Object> observable, Object oldValue, Object newValue) {
+
+			refreshVisual();
+		}
+	};
+
+	private class FocusListener implements ChangeListener<IContentPart<Node, ? extends Node>> {
+
+		private final TextNodePart nodePart;
+
+		FocusListener(TextNodePart nodePart) {
+			this.nodePart = nodePart;
+		}
+
+		@Override
+		public void changed(ObservableValue<? extends IContentPart<Node, ? extends Node>> observable,
+				IContentPart<Node, ? extends Node> oldValue, IContentPart<Node, ? extends Node> newValue) {
+
+			if (nodePart != newValue) {
+
+				editModeEnd(false);
+
+			}
+		}
+	}	
+
+	private ChangeListener<IContentPart<Node, ? extends Node>> focusObserver = new FocusListener(this);
+	
+	@SuppressWarnings("serial")
 	@Override
 	protected void doActivate() {
 		super.doActivate();
-		getContent().addPropertyChangeListener(this);
+		getContent().addPropertyChangeListener(objectObserver);
 
-		getViewer()
-			.getAdapter(FocusModel.class)
-			.addPropertyChangeListener( this::handleFocusModelUpdate );
-	
+		FocusModel<Node> focusModel = getRoot().getViewer().getAdapter(new TypeToken<FocusModel<Node>>() {
+		});
+
+		focusModel.focusProperty().addListener(focusObserver);
+
 	}
 
+	@SuppressWarnings("serial")
 	@Override
 	protected void doDeactivate() {
-		getContent().removePropertyChangeListener(this);
+		getContent().removePropertyChangeListener(objectObserver);
 
-		getViewer()
-			.getAdapter(FocusModel.class)
-			.removePropertyChangeListener( this::handleFocusModelUpdate );
-		
+		FocusModel<Node> focusModel = getRoot().getViewer().getAdapter(new TypeToken<FocusModel<Node>>() {});
+		focusModel.focusProperty().removeListener(focusObserver);
+
 		super.doDeactivate();
 	}
 
@@ -204,12 +240,12 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 	}
 
 	@Override
-	public SetMultimap<? extends Object, String> getContentAnchorages() {
+	public SetMultimap<? extends Object, String> doGetContentAnchorages() {
 		return HashMultimap.create();
 	}
 
 	@Override
-	public List<? extends Object> getContentChildren() {
+	public List<? extends Object> doGetContentChildren() {
 		return Collections.emptyList();
 	}
 

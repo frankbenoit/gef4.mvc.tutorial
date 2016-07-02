@@ -2,6 +2,7 @@ package gef4.mvc.tutorial;
 
 import org.eclipse.gef4.common.adapt.AdapterKey;
 import org.eclipse.gef4.common.adapt.inject.AdapterMaps;
+import org.eclipse.gef4.mvc.behaviors.HoverBehavior;
 import org.eclipse.gef4.mvc.fx.MvcFxModule;
 import org.eclipse.gef4.mvc.fx.parts.FXDefaultHoverFeedbackPartFactory;
 import org.eclipse.gef4.mvc.fx.parts.FXDefaultSelectionFeedbackPartFactory;
@@ -111,13 +112,17 @@ public final class GuiceModule extends MvcFxModule {
 			.addBinding(AdapterKey.defaultRole())
 			.to(CreationMenuOnClickPolicy.class);
 	}
-
+	
 	@Override
-	protected void bindIHandlePartFactory() {
-		binder()
-			.bind(new TypeLiteral<IHandlePartFactory<Node>>(){})
-			.toInstance(new HandlePartFactory());
-	}
+	protected void bindHoverHandlePartFactoryAsContentViewerAdapter(
+			MapBinder<AdapterKey<?>, Object> adapterMapBinder) {
+		
+		adapterMapBinder
+				.addBinding(AdapterKey
+						.role(HoverBehavior.HOVER_HANDLE_PART_FACTORY))
+				.to(HandlePartFactory.class);
+	}	
+	
 
 	protected void bindDeleteHoverHandlePartAdapters( MapBinder<AdapterKey<?>, Object> adapterMapBinder) {
 		adapterMapBinder
