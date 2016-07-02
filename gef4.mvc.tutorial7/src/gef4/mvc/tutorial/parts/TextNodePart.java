@@ -162,13 +162,6 @@ public class TextNodePart extends AbstractFXContentPart<StackPane> implements Pr
 
 	}
 
-	private void handleFocusModelUpdate(PropertyChangeEvent evt) {
-		// when focus goes away, cancel editing
-		if (evt.getNewValue() != this) {
-			editModeEnd(false);
-		}
-	}
-
 	private Bounds msrText(String string, Font font, int textStrokeWidth) {
 		Text msrText = new Text(string);
 		msrText.setFont(font);

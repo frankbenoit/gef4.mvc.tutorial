@@ -13,7 +13,6 @@ import org.eclipse.gef4.mvc.fx.policies.FXHoverOnHoverPolicy;
 import org.eclipse.gef4.mvc.fx.policies.FXTranslateSelectedOnDragPolicy;
 import org.eclipse.gef4.mvc.fx.providers.ShapeOutlineProvider;
 import org.eclipse.gef4.mvc.parts.IContentPartFactory;
-import org.eclipse.gef4.mvc.parts.IHandlePartFactory;
 
 import com.google.inject.Scopes;
 import com.google.inject.TypeLiteral;
@@ -31,7 +30,7 @@ import gef4.mvc.tutorial.policies.TextNodeOnTypePolicy;
 import gef4.mvc.tutorial.policies.TextNodeTransformPolicy;
 import javafx.scene.Node;
 
-@SuppressWarnings("serial")
+
 public final class GuiceModule extends MvcFxModule {
 
 	@Override

@@ -1,6 +1,5 @@
 package gef4.mvc.tutorial.model;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
