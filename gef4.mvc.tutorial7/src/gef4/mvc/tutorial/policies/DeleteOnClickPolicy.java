@@ -18,6 +18,8 @@ import org.eclipse.gef4.mvc.parts.IVisualPart;
 import org.eclipse.gef4.mvc.policies.AbstractInteractionPolicy;
 import org.eclipse.gef4.mvc.policies.DeletionPolicy;
 
+import com.google.common.reflect.TypeToken;
+
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 
@@ -28,7 +30,7 @@ public class DeleteOnClickPolicy extends AbstractInteractionPolicy<Node> impleme
 		System.out.println("DeleteOnClickPolicy.click()");
 		IVisualPart<Node, ? extends Node> targetPart = getTargetPart();
 		if (targetPart instanceof IContentPart) {
-			DeletionPolicy<Node> policy = getHost().getRoot().getAdapter(DeletionPolicy.class);
+			DeletionPolicy<Node> policy = getHost().getRoot().getAdapter(new TypeToken<DeletionPolicy<Node>>(){});
 			if (policy != null) {
 				init(policy);
 				// un establish anchor relations

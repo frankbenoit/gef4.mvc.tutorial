@@ -22,6 +22,7 @@ import org.eclipse.gef4.mvc.policies.CreationPolicy;
 import org.eclipse.gef4.mvc.viewer.IViewer;
 
 import com.google.common.collect.HashMultimap;
+import com.google.common.reflect.TypeToken;
 
 import gef4.mvc.tutorial.model.TextNode;
 import javafx.geometry.Insets;
@@ -108,7 +109,7 @@ public class CreationMenuOnClickPolicy extends AbstractInteractionPolicy<Node> i
 		IContentPart<Node, ? extends Node> contentPartModel = getHost().getRoot().getContentPartChildren().get(0);
 
 		// build create operation
-		CreationPolicy<Node> creationPolicy = root.getAdapter(CreationPolicy.class);
+		CreationPolicy<Node> creationPolicy = root.getAdapter(new TypeToken<CreationPolicy<Node>>(){});
 		creationPolicy.init();
 		creationPolicy.create(textNode, contentPartModel, HashMultimap.create());
 
