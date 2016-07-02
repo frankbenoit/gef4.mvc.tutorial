@@ -16,34 +16,39 @@ public class ChangeTextNodePositionOperation extends AbstractOperation implement
 	private TextNodePart part;
 	private Point oldPos;
 	private Point newPos;
+
 	public ChangeTextNodePositionOperation(TextNodePart part, Point oldPos, Point newPos) {
-		super( "Change TextNode Position" );
+		super("Change TextNode Position");
 		this.oldPos = oldPos;
 		this.newPos = newPos;
 		this.part = part;
 	}
 
-
 	@Override
 	public IStatus execute(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-		part.setPosition(newPos); 
+		part.setPosition(newPos);
 		return Status.OK_STATUS;
 	}
 
 	@Override
 	public IStatus redo(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-		return execute( monitor, info );
+		return execute(monitor, info);
 	}
 
 	@Override
 	public IStatus undo(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-		part.setPosition(oldPos); 
+		part.setPosition(oldPos);
 		return Status.OK_STATUS;
 	}
 
 	@Override
 	public boolean isNoOp() {
 		return false;
+	}
+
+	@Override
+	public boolean isContentRelevant() {
+		return true;
 	}
 
 }

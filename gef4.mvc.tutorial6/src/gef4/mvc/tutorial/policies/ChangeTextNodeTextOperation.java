@@ -15,9 +15,9 @@ public class ChangeTextNodeTextOperation extends AbstractOperation implements IT
 	TextNodePart part;
 	private String oldText;
 	private String newText;
-	
-	public ChangeTextNodeTextOperation(TextNodePart part, String oldText, String newText ) {
-		super( "Change Text in TextNode" );
+
+	public ChangeTextNodeTextOperation(TextNodePart part, String oldText, String newText) {
+		super("Change Text in TextNode");
 		this.part = part;
 		this.oldText = oldText;
 		this.newText = newText;
@@ -44,6 +44,11 @@ public class ChangeTextNodeTextOperation extends AbstractOperation implements IT
 	@Override
 	public boolean isNoOp() {
 		return oldText.equals(newText);
+	}
+
+	@Override
+	public boolean isContentRelevant() {
+		return true;
 	}
 
 }

@@ -19,7 +19,8 @@ public class ContentPartFactory implements IContentPartFactory<Node> {
 	private Injector injector;
 
 	@Override
-	public IContentPart<Node, ? extends Node> createContentPart(Object content, IBehavior<Node> contextBehavior, Map<Object, Object> contextMap) {
+	public IContentPart<Node, ? extends Node> createContentPart(Object content, IBehavior<Node> contextBehavior,
+			Map<Object, Object> contextMap) {
 
 		if (content instanceof Model) {
 			return injector.getInstance(ModelPart.class);

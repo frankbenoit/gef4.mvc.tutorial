@@ -1,85 +1,74 @@
 package gef4.mvc.tutorial.model;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import org.eclipse.gef4.common.properties.IPropertyChangeNotifier;
 import org.eclipse.gef4.geometry.planar.Point;
 
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.scene.paint.Color;
 
 @XmlRootElement
-public class TextNode implements IPropertyChangeNotifier {
-	
+public class TextNode {
+
 	@XmlTransient
-	protected PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-	
+	public static final String POSITION_PROPERTY = "position";
 	@XmlTransient
-	public final String POSITION_PROPERTY = "position";
-	@XmlTransient
-	public final String TEXT_PROPERTY = "text";
-	
+	public static final String TEXT_PROPERTY = "text";
+
 	@XmlTransient // handled over setter/getter
-	private Point position;
-	
+	private SimpleObjectProperty<Point> position = new SimpleObjectProperty<Point>(this, POSITION_PROPERTY);
+
 	@XmlTransient // handled over setter/getter
-	private String text;
-	
+	private SimpleObjectProperty<String> text = new SimpleObjectProperty<String>(this, TEXT_PROPERTY);
+
 	@XmlTransient // not handled now
 	private Color color = Color.LIGHTSKYBLUE;
 
-	public TextNode(){
-		this.position = new Point(0, 0);
-		this.text = "";
+	public TextNode() {
+		this.position.setValue(new Point(0, 0));
+		this.text.setValue("");
 	}
-	
-	public TextNode( double x, double y, String text ){
-		position = new Point(x, y);
-		this.text = text;
+
+	public TextNode(double x, double y, String text) {
+		this.position.setValue(new Point(x, y));
+		this.text.setValue(text);
 	}
-	
+
 	public String getText() {
-		return text;
+		return text.getValue();
 	}
 
 	public Point getPosition() {
-		return position.getCopy();
+		return position.getValue().getCopy();
 	}
-	
+
+	public void setText(String text) {
+		this.text.setValue(text);
+	}
+
+	public void setPosition(Point position) {
+		this.position.setValue(position);
+	}
+
 	public Color getColor() {
 		return color;
 	}
 
-	public void doChange(){
-		setPosition( new Point(
-				position.x + Math.random()*10 - 5, 
-				position.y + Math.random()*10 - 5));
-		setText( String.format("%s %s", text.split(" ")[0], Math.round(Math.random() * 100)));
+	public void doChange() {
+		setPosition(new Point(getPosition().x + Math.random() * 10 - 5, getPosition().y + Math.random() * 10 - 5));
+		setText(String.format("%s %s", getText().split(" ")[0], Math.round(Math.random() * 100)));
 	}
-	
-	 @Override
-	 public void addPropertyChangeListener(PropertyChangeListener listener) {
-		 pcs.addPropertyChangeListener(listener);
-	 }
-	 @Override
-	 public void removePropertyChangeListener(PropertyChangeListener listener) {
-		 pcs.removePropertyChangeListener(listener);
-	 }
 
-	 public void setText(String text) {
-		 String textOld = this.text;
-		 this.text = text;
-		 pcs.firePropertyChange(TEXT_PROPERTY, textOld, text);
-	 }
-	 
-	 public void setPosition(Point position) {
-		 Point positionOld = this.position;
-		 this.position = position;
-		 pcs.firePropertyChange(POSITION_PROPERTY, positionOld, position);
-	 }
+	public void addPropertyChangeListener(ChangeListener<Object> observer) {
+		position.addListener(observer);
+		text.addListener(observer);
+	}
 
+	public void removePropertyChangeListener(ChangeListener<Object> observer) {
+		position.removeListener(observer);
+		text.removeListener(observer);
+	}
 
 }

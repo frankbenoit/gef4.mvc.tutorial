@@ -11,11 +11,13 @@
  *******************************************************************************/
 package gef4.mvc.tutorial.policies;
 
+import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.gef4.fx.nodes.InfiniteCanvas;
-import org.eclipse.gef4.mvc.fx.policies.AbstractFXOnClickPolicy;
+import org.eclipse.gef4.mvc.fx.policies.IFXOnClickPolicy;
 import org.eclipse.gef4.mvc.fx.viewer.FXViewer;
 import org.eclipse.gef4.mvc.parts.IContentPart;
 import org.eclipse.gef4.mvc.parts.IRootPart;
+import org.eclipse.gef4.mvc.policies.AbstractInteractionPolicy;
 import org.eclipse.gef4.mvc.policies.CreationPolicy;
 import org.eclipse.gef4.mvc.viewer.IViewer;
 
@@ -36,7 +38,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Popup;
 
 // TODO: only applicable for FXRootPart and FXViewer
-public class CreationMenuOnClickPolicy extends AbstractFXOnClickPolicy {
+public class CreationMenuOnClickPolicy extends AbstractInteractionPolicy<Node> implements IFXOnClickPolicy {
 
 	/**
 	 * The adapter role for the
@@ -54,16 +56,16 @@ public class CreationMenuOnClickPolicy extends AbstractFXOnClickPolicy {
 	public void click(MouseEvent e) {
 		// open menu on right click
 		if (MouseButton.SECONDARY.equals(e.getButton())) {
-			
+
 			initialMousePositionInScreen = new Point2D(e.getScreenX(), e.getScreenY());
-			
+
 			// use the viewer to transform into local coordinates
 			// this works even if the viewer is scrolled and/or zoomed.
 			InfiniteCanvas infiniteCanvas = getViewer().getCanvas();
 			initialMousePositionInScene = infiniteCanvas.getContentGroup().screenToLocal(initialMousePositionInScreen);
-			
+
 			// only open if the even was on the visible canvas
-			if( infiniteCanvas.getBoundsInLocal().contains(initialMousePositionInScene) ){
+			if (infiniteCanvas.getBoundsInLocal().contains(initialMousePositionInScene)) {
 				openMenu(e);
 			}
 		}
@@ -74,47 +76,49 @@ public class CreationMenuOnClickPolicy extends AbstractFXOnClickPolicy {
 	}
 
 	private void openMenu(final MouseEvent me) {
-		popup = new Popup(); 
+		popup = new Popup();
 
 		popup.autoFixProperty().set(true);
 		popup.autoHideProperty().set(true);
-		popup.setX(initialMousePositionInScreen.getX()); 
+		popup.setX(initialMousePositionInScreen.getX());
 		popup.setY(initialMousePositionInScreen.getY());
 
 		HBox hb = new HBox();
-		hb.setStyle("-fx-border-width: 1px; -fx-border-color: DIMGRAY; -fx-background-color: lightgray" );
+		hb.setStyle("-fx-border-width: 1px; -fx-border-color: DIMGRAY; -fx-background-color: lightgray");
 		Button first = new Button();
-		first.setOnAction(e-> this.addTextNode() );
-		ImageView iv = new ImageView( new Image(CreationMenuOnClickPolicy.class.getResourceAsStream("AddTextNode.png")));
+		first.setOnAction(e -> this.addTextNode());
+		ImageView iv = new ImageView(new Image(CreationMenuOnClickPolicy.class.getResourceAsStream("AddTextNode.png")));
 		iv.autosize();
 		first.setGraphic(iv);
-		hb.getChildren().add( first );
-		hb.setEffect( new DropShadow( 4, 4, 2, Color.GRAY ) );
-		hb.setSpacing( 4 );
-		hb.setPadding( new Insets( 4, 4, 4, 4));
-		popup.getContent().addAll( hb );
+		hb.getChildren().add(first);
+		hb.setEffect(new DropShadow(4, 4, 2, Color.GRAY));
+		hb.setSpacing(4);
+		hb.setPadding(new Insets(4, 4, 4, 4));
+		popup.getContent().addAll(hb);
 		popup.show(getViewer().getScene().getWindow());
-		
+
 	}
 
-	private void addTextNode(){
-		
+	private void addTextNode() {
+
 		IRootPart<Node, ? extends Node> root = getHost().getRoot();
 		IViewer<Node> viewer = root.getViewer();
 
-		TextNode textNode = new TextNode( initialMousePositionInScene.getX(), initialMousePositionInScene.getY(), "A" );
+		TextNode textNode = new TextNode(initialMousePositionInScene.getX(), initialMousePositionInScene.getY(), "A");
 		IContentPart<Node, ? extends Node> contentPartModel = getHost().getRoot().getContentPartChildren().get(0);
-		
+
 		// build create operation
 		CreationPolicy<Node> creationPolicy = root.getAdapter(CreationPolicy.class);
 		creationPolicy.init();
-		creationPolicy.create(
-				textNode, 
-				contentPartModel, 
-				HashMultimap.create());
+		creationPolicy.create(textNode, contentPartModel, HashMultimap.create());
 
 		// execute on stack
-		viewer.getDomain().execute(creationPolicy.commit());
+		try {
+			viewer.getDomain().execute(creationPolicy.commit());
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		popup.hide();
 	}
