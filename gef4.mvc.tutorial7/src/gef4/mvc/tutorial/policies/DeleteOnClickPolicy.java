@@ -12,11 +12,11 @@
  *******************************************************************************/
 package gef4.mvc.tutorial.policies;
 
-import org.eclipse.gef4.mvc.fx.policies.IFXOnClickPolicy;
-import org.eclipse.gef4.mvc.parts.IContentPart;
-import org.eclipse.gef4.mvc.parts.IVisualPart;
-import org.eclipse.gef4.mvc.policies.AbstractInteractionPolicy;
-import org.eclipse.gef4.mvc.policies.DeletionPolicy;
+import org.eclipse.gef.mvc.fx.policies.IFXOnClickPolicy;
+import org.eclipse.gef.mvc.parts.IContentPart;
+import org.eclipse.gef.mvc.parts.IVisualPart;
+import org.eclipse.gef.mvc.policies.AbstractInteractionPolicy;
+import org.eclipse.gef.mvc.policies.DeletionPolicy;
 
 import com.google.common.reflect.TypeToken;
 

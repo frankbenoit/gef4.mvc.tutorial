@@ -13,10 +13,10 @@ package gef4.mvc.tutorial.parts;
 
 import javafx.scene.Node;
 
-import org.eclipse.gef4.common.collections.SetMultimapChangeListener;
-import org.eclipse.gef4.mvc.fx.parts.AbstractFXHandlePart;
-import org.eclipse.gef4.mvc.parts.IVisualPart;
-import org.eclipse.gef4.mvc.viewer.IViewer;
+import org.eclipse.gef.common.collections.SetMultimapChangeListener;
+import org.eclipse.gef.mvc.fx.parts.AbstractFXHandlePart;
+import org.eclipse.gef.mvc.parts.IVisualPart;
+import org.eclipse.gef.mvc.viewer.IViewer;
 
 import com.google.common.collect.SetMultimap;
 
@@ -43,7 +43,7 @@ public abstract class AbstractLogoHoverHandlePart<T extends Node> extends Abstra
 
 		@Override
 		public void onChanged(
-				org.eclipse.gef4.common.collections.SetMultimapChangeListener.Change<? extends IVisualPart<Node, ? extends Node>, ? extends String> change) {
+				org.eclipse.gef.common.collections.SetMultimapChangeListener.Change<? extends IVisualPart<Node, ? extends Node>, ? extends String> change) {
 
 			if (!registered && getViewer() != null) {
 				register(getViewer());

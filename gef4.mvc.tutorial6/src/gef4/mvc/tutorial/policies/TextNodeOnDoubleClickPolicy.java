@@ -1,7 +1,7 @@
 package gef4.mvc.tutorial.policies;
 
-import org.eclipse.gef4.mvc.fx.policies.IFXOnClickPolicy;
-import org.eclipse.gef4.mvc.policies.AbstractInteractionPolicy;
+import org.eclipse.gef.mvc.fx.policies.IFXOnClickPolicy;
+import org.eclipse.gef.mvc.policies.AbstractInteractionPolicy;
 
 import gef4.mvc.tutorial.parts.TextNodePart;
 import javafx.scene.Node;

@@ -15,7 +15,7 @@ import java.net.URL;
 
 import javafx.scene.image.Image;
 
-import org.eclipse.gef4.fx.nodes.HoverOverlayImageView;
+import org.eclipse.gef.fx.nodes.HoverOverlayImageView;
 
 public class DeleteHoverHandlePart extends AbstractLogoHoverHandlePart<HoverOverlayImageView> {
 

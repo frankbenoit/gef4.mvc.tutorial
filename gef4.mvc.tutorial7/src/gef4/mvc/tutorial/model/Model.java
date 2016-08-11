@@ -5,8 +5,8 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.eclipse.gef4.common.beans.property.ReadOnlyListWrapperEx;
-import org.eclipse.gef4.common.collections.CollectionUtils;
+import org.eclipse.gef.common.beans.property.ReadOnlyListWrapperEx;
+import org.eclipse.gef.common.collections.CollectionUtils;
 
 import javafx.collections.ListChangeListener;
 

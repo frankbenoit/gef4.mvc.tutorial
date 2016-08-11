@@ -1,16 +1,16 @@
 package gef4.mvc.tutorial;
 
-import org.eclipse.gef4.common.adapt.AdapterKey;
-import org.eclipse.gef4.common.adapt.inject.AdapterMaps;
-import org.eclipse.gef4.mvc.fx.MvcFxModule;
-import org.eclipse.gef4.mvc.fx.parts.FXDefaultHoverFeedbackPartFactory;
-import org.eclipse.gef4.mvc.fx.parts.FXDefaultSelectionFeedbackPartFactory;
-import org.eclipse.gef4.mvc.fx.parts.FXDefaultSelectionHandlePartFactory;
-import org.eclipse.gef4.mvc.fx.policies.FXFocusAndSelectOnClickPolicy;
-import org.eclipse.gef4.mvc.fx.policies.FXHoverOnHoverPolicy;
-import org.eclipse.gef4.mvc.fx.policies.FXTranslateSelectedOnDragPolicy;
-import org.eclipse.gef4.mvc.fx.providers.ShapeOutlineProvider;
-import org.eclipse.gef4.mvc.parts.IContentPartFactory;
+import org.eclipse.gef.common.adapt.AdapterKey;
+import org.eclipse.gef.common.adapt.inject.AdapterMaps;
+import org.eclipse.gef.mvc.fx.MvcFxModule;
+import org.eclipse.gef.mvc.fx.parts.FXDefaultHoverFeedbackPartFactory;
+import org.eclipse.gef.mvc.fx.parts.FXDefaultSelectionFeedbackPartFactory;
+import org.eclipse.gef.mvc.fx.parts.FXDefaultSelectionHandlePartFactory;
+import org.eclipse.gef.mvc.fx.policies.FXFocusAndSelectOnClickPolicy;
+import org.eclipse.gef.mvc.fx.policies.FXHoverOnHoverPolicy;
+import org.eclipse.gef.mvc.fx.policies.FXTranslateSelectedOnDragPolicy;
+import org.eclipse.gef.mvc.fx.providers.ShapeOutlineProvider;
+import org.eclipse.gef.mvc.parts.IContentPartFactory;
 
 import com.google.inject.Scopes;
 import com.google.inject.TypeLiteral;

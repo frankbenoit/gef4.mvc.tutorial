@@ -1,9 +1,9 @@
 package gef4.mvc.tutorial.policies;
 
-import org.eclipse.gef4.geometry.planar.Point;
-import org.eclipse.gef4.mvc.fx.policies.FXTransformPolicy;
-import org.eclipse.gef4.mvc.operations.ForwardUndoCompositeOperation;
-import org.eclipse.gef4.mvc.operations.ITransactionalOperation;
+import org.eclipse.gef.geometry.planar.Point;
+import org.eclipse.gef.mvc.fx.policies.FXTransformPolicy;
+import org.eclipse.gef.mvc.operations.ForwardUndoCompositeOperation;
+import org.eclipse.gef.mvc.operations.ITransactionalOperation;
 
 import gef4.mvc.tutorial.parts.TextNodePart;
 import javafx.scene.transform.Affine;

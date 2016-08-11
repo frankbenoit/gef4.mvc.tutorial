@@ -12,14 +12,14 @@
 package gef4.mvc.tutorial.policies;
 
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.gef4.fx.nodes.InfiniteCanvas;
-import org.eclipse.gef4.mvc.fx.policies.IFXOnClickPolicy;
-import org.eclipse.gef4.mvc.fx.viewer.FXViewer;
-import org.eclipse.gef4.mvc.parts.IContentPart;
-import org.eclipse.gef4.mvc.parts.IRootPart;
-import org.eclipse.gef4.mvc.policies.AbstractInteractionPolicy;
-import org.eclipse.gef4.mvc.policies.CreationPolicy;
-import org.eclipse.gef4.mvc.viewer.IViewer;
+import org.eclipse.gef.fx.nodes.InfiniteCanvas;
+import org.eclipse.gef.mvc.fx.policies.IFXOnClickPolicy;
+import org.eclipse.gef.mvc.fx.viewer.FXViewer;
+import org.eclipse.gef.mvc.parts.IContentPart;
+import org.eclipse.gef.mvc.parts.IRootPart;
+import org.eclipse.gef.mvc.policies.AbstractInteractionPolicy;
+import org.eclipse.gef.mvc.policies.CreationPolicy;
+import org.eclipse.gef.mvc.viewer.IViewer;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.reflect.TypeToken;
@@ -115,7 +115,7 @@ public class CreationMenuOnClickPolicy extends AbstractInteractionPolicy<Node> i
 
 		// execute on stack
 		try {
-			viewer.getDomain().execute(creationPolicy.commit());
+			viewer.getDomain().execute(creationPolicy.commit(), null);
 		} catch (ExecutionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -2,9 +2,9 @@ package gef4.mvc.tutorial.parts;
 
 import java.util.Map;
 
-import org.eclipse.gef4.mvc.behaviors.IBehavior;
-import org.eclipse.gef4.mvc.parts.IContentPart;
-import org.eclipse.gef4.mvc.parts.IContentPartFactory;
+import org.eclipse.gef.mvc.behaviors.IBehavior;
+import org.eclipse.gef.mvc.parts.IContentPart;
+import org.eclipse.gef.mvc.parts.IContentPartFactory;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
