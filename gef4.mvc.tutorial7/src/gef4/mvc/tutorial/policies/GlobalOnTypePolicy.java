@@ -1,9 +1,9 @@
 package gef4.mvc.tutorial.policies;
 
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.gef4.mvc.domain.IDomain;
-import org.eclipse.gef4.mvc.fx.policies.IFXOnTypePolicy;
-import org.eclipse.gef4.mvc.policies.AbstractInteractionPolicy;
+import org.eclipse.gef.mvc.domain.IDomain;
+import org.eclipse.gef.mvc.fx.policies.IFXOnTypePolicy;
+import org.eclipse.gef.mvc.policies.AbstractInteractionPolicy;
 
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;

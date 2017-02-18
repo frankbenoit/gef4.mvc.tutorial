@@ -1,6 +1,7 @@
 package gef4.mvc.tutorial.model;
 
-import org.eclipse.gef4.geometry.planar.Point;
+
+import org.eclipse.gef.geometry.planar.Point;
 
 import javafx.scene.paint.Color;
 

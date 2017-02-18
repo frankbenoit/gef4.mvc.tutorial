@@ -10,10 +10,10 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import org.eclipse.gef4.fx.nodes.InfiniteCanvas;
-import org.eclipse.gef4.mvc.fx.domain.FXDomain;
-import org.eclipse.gef4.mvc.fx.viewer.FXViewer;
-import org.eclipse.gef4.mvc.models.ContentModel;
+import org.eclipse.gef.fx.nodes.InfiniteCanvas;
+import org.eclipse.gef.mvc.fx.domain.FXDomain;
+import org.eclipse.gef.mvc.fx.viewer.FXViewer;
+import org.eclipse.gef.mvc.models.ContentModel;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

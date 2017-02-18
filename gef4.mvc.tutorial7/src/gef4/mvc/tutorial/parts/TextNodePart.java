@@ -6,15 +6,15 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.gef4.fx.nodes.GeometryNode;
-import org.eclipse.gef4.geometry.planar.Point;
-import org.eclipse.gef4.geometry.planar.Rectangle;
-import org.eclipse.gef4.geometry.planar.RoundedRectangle;
-import org.eclipse.gef4.mvc.domain.IDomain;
-import org.eclipse.gef4.mvc.fx.parts.AbstractFXContentPart;
-import org.eclipse.gef4.mvc.fx.policies.FXTransformPolicy;
-import org.eclipse.gef4.mvc.models.FocusModel;
-import org.eclipse.gef4.mvc.parts.IContentPart;
+import org.eclipse.gef.fx.nodes.GeometryNode;
+import org.eclipse.gef.geometry.planar.Point;
+import org.eclipse.gef.geometry.planar.Rectangle;
+import org.eclipse.gef.geometry.planar.RoundedRectangle;
+import org.eclipse.gef.mvc.domain.IDomain;
+import org.eclipse.gef.mvc.fx.parts.AbstractFXContentPart;
+import org.eclipse.gef.mvc.fx.policies.FXTransformPolicy;
+import org.eclipse.gef.mvc.models.FocusModel;
+import org.eclipse.gef.mvc.parts.IContentPart;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;

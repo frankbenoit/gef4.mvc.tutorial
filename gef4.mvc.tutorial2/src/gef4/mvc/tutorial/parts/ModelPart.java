@@ -3,11 +3,11 @@ package gef4.mvc.tutorial.parts;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.gef4.fx.nodes.GeometryNode;
-import org.eclipse.gef4.geometry.planar.Dimension;
-import org.eclipse.gef4.geometry.planar.Rectangle;
-import org.eclipse.gef4.geometry.planar.RoundedRectangle;
-import org.eclipse.gef4.mvc.fx.parts.AbstractFXContentPart;
+import org.eclipse.gef.fx.nodes.GeometryNode;
+import org.eclipse.gef.geometry.planar.Dimension;
+import org.eclipse.gef.geometry.planar.Rectangle;
+import org.eclipse.gef.geometry.planar.RoundedRectangle;
+import org.eclipse.gef.mvc.fx.parts.AbstractFXContentPart;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;

@@ -3,11 +3,11 @@ package gef4.mvc.tutorial;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.gef4.mvc.fx.MvcFxModule;
-import org.eclipse.gef4.mvc.fx.domain.FXDomain;
-import org.eclipse.gef4.mvc.fx.viewer.FXViewer;
-import org.eclipse.gef4.mvc.models.ContentModel;
-import org.eclipse.gef4.mvc.parts.IContentPartFactory;
+import org.eclipse.gef.mvc.fx.MvcFxModule;
+import org.eclipse.gef.mvc.fx.domain.FXDomain;
+import org.eclipse.gef.mvc.fx.viewer.FXViewer;
+import org.eclipse.gef.mvc.models.ContentModel;
+import org.eclipse.gef.mvc.parts.IContentPartFactory;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

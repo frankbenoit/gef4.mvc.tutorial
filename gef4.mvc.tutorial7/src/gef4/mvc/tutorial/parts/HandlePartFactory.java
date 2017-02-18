@@ -15,10 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.gef4.mvc.behaviors.IBehavior;
-import org.eclipse.gef4.mvc.fx.parts.FXDefaultHoverHandlePartFactory;
-import org.eclipse.gef4.mvc.parts.IHandlePart;
-import org.eclipse.gef4.mvc.parts.IVisualPart;
+import org.eclipse.gef.mvc.behaviors.IBehavior;
+import org.eclipse.gef.mvc.fx.parts.FXDefaultHoverHandlePartFactory;
+import org.eclipse.gef.mvc.parts.IHandlePart;
+import org.eclipse.gef.mvc.parts.IVisualPart;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;

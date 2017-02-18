@@ -1,6 +1,6 @@
 package gef4.mvc.tutorial.model;
 
-import org.eclipse.gef4.geometry.planar.Point;
+import org.eclipse.gef.geometry.planar.Point;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;

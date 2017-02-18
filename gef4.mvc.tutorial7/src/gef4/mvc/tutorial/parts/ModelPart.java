@@ -4,8 +4,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
-import org.eclipse.gef4.mvc.fx.parts.AbstractFXContentPart;
-import org.eclipse.gef4.mvc.parts.IVisualPart;
+import org.eclipse.gef.mvc.fx.parts.AbstractFXContentPart;
+import org.eclipse.gef.mvc.parts.IVisualPart;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;

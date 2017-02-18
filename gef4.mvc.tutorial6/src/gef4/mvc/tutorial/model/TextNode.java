@@ -3,7 +3,7 @@ package gef4.mvc.tutorial.model;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import org.eclipse.gef4.geometry.planar.Point;
+import org.eclipse.gef.geometry.planar.Point;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;

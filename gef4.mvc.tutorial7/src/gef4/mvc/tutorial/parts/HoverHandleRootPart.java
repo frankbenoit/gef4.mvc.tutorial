@@ -13,9 +13,9 @@ package gef4.mvc.tutorial.parts;
 
 import java.util.Map.Entry;
 
-import org.eclipse.gef4.mvc.fx.parts.AbstractFXHandlePart;
-import org.eclipse.gef4.mvc.fx.policies.FXHoverOnHoverPolicy;
-import org.eclipse.gef4.mvc.parts.IVisualPart;
+import org.eclipse.gef.mvc.fx.parts.AbstractFXHandlePart;
+import org.eclipse.gef.mvc.fx.policies.FXHoverOnHoverPolicy;
+import org.eclipse.gef.mvc.parts.IVisualPart;
 
 import com.google.common.collect.SetMultimap;
 
